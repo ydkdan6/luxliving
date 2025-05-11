@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Montserrat', sans-serif;
+    @apply text-secondary-950 scroll-smooth;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    @apply font-semibold tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl leading-tight;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl leading-tight;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl leading-tight;
+  }
+
+  body {
+    @apply bg-cream-50;
+  }
+
+  .reveal {
+    @apply opacity-0 transition-all duration-1000;
+  }
+
+  .reveal.active {
+    @apply opacity-100 translate-y-0;
+  }
+
+  .reveal[data-effect="fade-bottom"] {
+    @apply translate-y-10;
+  }
+
+  .reveal[data-effect="fade-left"] {
+    @apply -translate-x-10;
+  }
+
+  .reveal[data-effect="fade-right"] {
+    @apply translate-x-10;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-5 py-3 text-base font-medium transition-all duration-300 border border-transparent rounded-sm;
+  }
+
+  .btn-primary {
+    @apply text-secondary-950 bg-primary-300 hover:bg-primary-400;
+  }
+
+  .btn-secondary {
+    @apply text-cream-50 bg-secondary-800 hover:bg-secondary-900;
+  }
+
+  .btn-outline {
+    @apply text-secondary-800 bg-transparent border-secondary-800 hover:bg-secondary-800 hover:text-cream-50;
+  }
+
+  .input {
+    @apply w-full px-4 py-3 text-base border rounded-sm bg-cream-50 border-cream-300 focus:ring-1 focus:ring-primary-300 focus:border-primary-300 outline-none;
+  }
+
+  .label {
+    @apply block mb-2 text-sm font-medium text-secondary-800;
+  }
+
+  .container {
+    @apply px-4 mx-auto max-w-7xl sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-12 md:py-20;
+  }
+
+  .card {
+    @apply overflow-hidden bg-white rounded-sm shadow-md hover:shadow-lg transition-shadow duration-300;
+  }
+}
+
+/* Preloader Animation */
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; visibility: hidden; }
+}
+
+.preloader-fade-out {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
