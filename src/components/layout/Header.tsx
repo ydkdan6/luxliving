@@ -29,8 +29,8 @@ export default function Header() {
   const isHomePage = location.pathname === '/';
   const headerClass = `fixed top-0 w-full z-50 transition-all duration-300 ${
     isScrolled || !isHomePage
-      ? 'bg-white shadow-md py-2'
-      : 'bg-transparent py-4'
+      ? 'bg-black shadow-md py-1'
+      : 'bg-black py-1'
   }`;
 
   const navLinks = [
@@ -45,7 +45,11 @@ export default function Header() {
     <header className={headerClass}>
       <div className="container flex items-center justify-between">
         <Link to="/" className="font-serif text-3xl font-bold text-secondary-900">
-          Luxe<span className="text-primary-400">Living</span>
+        <img
+            src="/logo.png"
+            alt="Luxury Property"
+            className="w-[180px] h-[74px]"
+          />
         </Link>
 
         {/* Desktop Menu */}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, X } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { BlogPost, Property } from '../types';
 import Layout from '../components/layout/Layout';
@@ -9,12 +9,89 @@ import BlogCard from '../components/ui/BlogCard';
 import PropertyCard from '../components/ui/PropertyCard';
 import ContactForm from '../components/forms/ContactForm';
 
+// Welcome Modal Component
+function WelcomeModal({ isOpen, onClose }) {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm z-50 flex items-center justify-center"
+            onClick={onClose}
+          />
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="fixed top-28 md:left-1/3 left-4 w-11/12 max-w-sm sm:max-w-lg transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-br from-secondary-900 to-secondary-950 p-10 lg:p-10  left-0 h-90 md:h-90 md:w-90 rounded-xl shadow-2xl z-50 max-w-lg w-full border border-secondary-800"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 rounded-t-xl"></div>
+            
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 text-cream-100 hover:text-primary-500 transition-colors p-2 rounded-full hover:bg-secondary-800"
+            >
+              <X size={20} />
+            </button>
+            
+            <div className="text-center">
+              <div className="mb-6 inline-block bg-secondary-800 p-4 rounded-full">
+                <img
+                  src="/public/logo.png"
+                  alt="LuxeLiving"
+                  className="w-24 h-24 object-contain"
+                />
+              </div>
+              
+              <h2 className="text-3xl font-serif font-bold text-white mb-2">
+                Welcome to <span className="text-primary-500">BuyDubai</span>
+              </h2>
+              
+              <div className="w-16 h-1 bg-primary-500 mx-auto mb-6 rounded-full"></div>
+              
+              <p className="text-cream-100 mb-8 leading-relaxed">
+                Discover the epitome of luxury living through our curated collection of premium properties
+                and exclusive lifestyle insights.
+              </p>
+              
+              <motion.button
+                onClick={onClose}
+                className="px-8 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-lg shadow-lg hover:shadow-primary-500/20 transition-all duration-300 hover:-translate-y-1"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Start Exploring
+              </motion.button>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
 export default function Home() {
-  const [featuredPosts, setFeaturedPosts] = useState<BlogPost[]>([]);
-  const [featuredProperties, setFeaturedProperties] = useState<Property[]>([]);
+  const [featuredPosts, setFeaturedPosts] = useState([]);
+  const [featuredProperties, setFeaturedProperties] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(true); // Set to true by default
 
   useEffect(() => {
+    // Check if this is the first visit - but show modal on every visit for development/testing
+    // const hasVisitedBefore = localStorage.getItem('hasVisitedBefore');
+    
+    // if (!hasVisitedBefore) {
+    //   // Show welcome modal on first visit
+    //   setShowWelcomeModal(true);
+    //   // Set flag in localStorage to track that user has visited before
+    //   localStorage.setItem('hasVisitedBefore', 'true');
+    // }
+
     const fetchFeaturedContent = async () => {
       try {
         // Featured blog posts
@@ -44,8 +121,15 @@ export default function Home() {
     fetchFeaturedContent();
   }, []);
 
+  const closeWelcomeModal = () => {
+    setShowWelcomeModal(false);
+  };
+
   return (
     <Layout>
+      {/* Welcome Modal */}
+      <WelcomeModal isOpen={showWelcomeModal} onClose={closeWelcomeModal} />
+      
       {/* Hero Section */}
       <section className="relative h-screen">
         <div className="absolute inset-0">

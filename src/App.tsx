@@ -7,7 +7,9 @@ import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import Properties from './pages/Properties';
 import PropertyDetail from './pages/PropertyDetail';
-import Login from './pages/Login';
+import Login from './pages/Login'; 
+import About from './pages/About';
+import Contact from './pages/Contact';
 
 // Admin Pages
 import Dashboard from './pages/admin/Dashboard';
@@ -20,6 +22,8 @@ function App() {
     <Routes>
       {/* Public Routes */}
       <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:slug" element={<BlogPost />} />
       <Route path="/properties" element={<Properties />} />

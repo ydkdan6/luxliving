@@ -18,7 +18,7 @@ export default function Footer() {
             </p>
             <div className="flex mt-6 space-x-4">
               <a
-                href="#"
+                href="https://www.instagram.com/buydubailuxury?igsh=czF2Z2NhdXV5czhk"
                 className="p-2 transition-colors rounded-full text-cream-300 hover:text-primary-400 hover:bg-secondary-800"
                 aria-label="Instagram"
               >
@@ -98,8 +98,8 @@ export default function Footer() {
             <address className="not-italic">
               <p>1234 Luxury Avenue</p>
               <p>Beverly Hills, CA 90210</p>
-              <p className="mt-2">+1 (800) 123-4567</p>
-              <p>info@luxeliving.com</p>
+              <p className="mt-2">+1 437 559-5135</p>
+              <p>info@buydubailuxury.com</p>
             </address>
           </div>
         </div>
