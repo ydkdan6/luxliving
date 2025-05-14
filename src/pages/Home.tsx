@@ -42,7 +42,7 @@ function WelcomeModal({ isOpen, onClose }) {
             <div className="text-center">
               <div className="mb-6 inline-block bg-secondary-800 p-4 rounded-full">
                 <img
-                  src="public\logo.png"
+                  src="/logo.png"
                   alt="buydubai"
                   className="w-24 h-24 object-contain"
                 />
