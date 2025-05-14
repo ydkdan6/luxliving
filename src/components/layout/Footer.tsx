@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
             <Link to="/" className="font-serif text-3xl font-bold text-white">
-              Luxe<span className="text-primary-400">Living</span>
+              Buy<span className="text-primary-400">DubaiLuxury</span>
             </Link>
             <p className="mt-4 text-cream-300">
               Curating luxury experiences and properties for the discerning individual.
