@@ -49,7 +49,7 @@ function WelcomeModal({ isOpen, onClose }) {
               </div>
               
               <h2 className="text-3xl font-serif font-bold text-white mb-2">
-                Welcome to <span className="text-primary-500">BuyDubai</span>
+                Welcome to <span className="text-primary-500">BuyDubaiLuxury</span>
               </h2>
               
               <div className="w-16 h-1 bg-primary-500 mx-auto mb-6 rounded-full"></div>
