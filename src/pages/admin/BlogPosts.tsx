@@ -105,14 +105,14 @@ export default function BlogPosts() {
           onClick={handleCreateNew}
           className="mt-4 sm:mt-0 btn btn-primary flex items-center"
         >
-          <Plus size={18} className="mr-2" />
+          <Plus size={18} className="mr-2 text-black" />
           Create New Post
         </button>
       </div>
 
       {isEditing ? (
         <div className="bg-white p-6 rounded-sm shadow-sm">
-          <h2 className="text-2xl font-medium mb-6">
+          <h2 className="text-2xl font-medium mb-6 text-black">
             {selectedPost ? 'Edit Post' : 'Create New Post'}
           </h2>
           <BlogPostForm

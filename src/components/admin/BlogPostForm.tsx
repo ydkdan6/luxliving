@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { supabase } from '../../lib/supabase';
 import { BlogPost, BlogCategory } from '../../types';
@@ -22,7 +22,32 @@ interface BlogPostFormProps {
 export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const { user } = { user: { id: 'admin' } }; // In a real app, this would come from useAuth
+  const [existingUserID, setExistingUserID] = useState<string | null>(null);
+  
+  // Fetch an existing user ID from the users table
+  useEffect(() => {
+    async function fetchExistingUser() {
+      try {
+        const { data, error } = await supabase
+          .from('users')
+          .select('id')
+          .limit(1);
+          
+        if (error) {
+          console.error('Error fetching user:', error);
+          return;
+        }
+        
+        if (data && data.length > 0) {
+          setExistingUserID(data[0].id);
+        }
+      } catch (err) {
+        console.error('Error in fetchExistingUser:', err);
+      }
+    }
+    
+    fetchExistingUser();
+  }, []); 
   
   const {
     register,
@@ -69,6 +94,10 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
         if (error) throw error;
       } else {
         // Create new post
+        if (!existingUserID) {
+          throw new Error("No valid user ID available. Cannot create post without a valid author.");
+        }
+        
         const { error } = await supabase
           .from('blog_posts')
           .insert([
@@ -80,7 +109,7 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
               image_url: data.image_url,
               category_id: data.category_id,
               tags: tagsArray,
-              author_id: user.id,
+              author_id: existingUserID, // Use an existing user ID from the database
             },
           ]);
         
@@ -90,7 +119,7 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
       onSuccess();
     } catch (error) {
       console.error('Error saving blog post:', error);
-      setErrorMessage('There was an error saving the blog post. Please try again.');
+      setErrorMessage(`There was an error saving the blog post: ${error.message || 'Please try again.'}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -112,11 +141,11 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div>
-        <label htmlFor="title" className="label">Title</label>
+        <label htmlFor="title" className="label text-black">Title:</label>
         <input
           id="title"
           type="text"
-          className={`input ${errors.title ? 'border-red-500' : ''}`}
+          className={`input text-black mx-3 px-2 h-8 w-[260px] border-primary-500 ${errors.title ? 'border-red-500' : ''}`}
           {...register('title', { required: 'Title is required' })}
         />
         {errors.title && (
@@ -126,12 +155,12 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
       
       <div className="flex items-end space-x-4">
         <div className="flex-grow">
-          <label htmlFor="slug" className="label">Slug</label>
+          <label htmlFor="slug" className="label text-black">Slug:</label>
           <div className="flex">
             <input
               id="slug"
               type="text"
-              className={`input ${errors.slug ? 'border-red-500' : ''}`}
+              className={`input text-black mx-3 px-2 h-8 w-[260px] border-primary-500 ${errors.slug ? 'border-red-500' : ''}`}
               {...register('slug', { required: 'Slug is required' })}
             />
           </div>
@@ -141,17 +170,17 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
         </div>
         <button
           onClick={generateSlug}
-          className="btn btn-outline py-2 px-3 h-[46px]"
+          className="btn btn-outline py-2 px-3 h-[46px] text-black"
         >
           Generate from Title
         </button>
       </div>
       
       <div>
-        <label htmlFor="category_id" className="label">Category</label>
+        <label htmlFor="category_id" className="label text-black">Category:</label>
         <select
           id="category_id"
-          className={`input ${errors.category_id ? 'border-red-500' : ''}`}
+          className={`input text-black mx-3 px-2 h-8 w-[260px] border-primary-500 ${errors.category_id ? 'border-red-500' : ''}`}
           {...register('category_id', { required: 'Category is required' })}
         >
           <option value="">Select Category</option>
@@ -167,11 +196,11 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
       </div>
       
       <div>
-        <label htmlFor="image_url" className="label">Feature Image URL</label>
+        <label htmlFor="image_url" className="label text-black">Feature Image URL:</label>
         <input
           id="image_url"
           type="text"
-          className={`input ${errors.image_url ? 'border-red-500' : ''}`}
+          className={`input text-black mx-3 px-2 h-8 w-[260px] border-primary-500 ${errors.image_url ? 'border-red-500' : ''}`}
           {...register('image_url', { required: 'Image URL is required' })}
         />
         {errors.image_url && (
@@ -180,11 +209,12 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
       </div>
       
       <div>
-        <label htmlFor="excerpt" className="label">Excerpt</label>
+        <label htmlFor="excerpt" className="label text-black">Excerpt:</label>
         <textarea
           id="excerpt"
+          cols={300}
           rows={3}
-          className={`input ${errors.excerpt ? 'border-red-500' : ''}`}
+          className={`input text-black mx-3 px-2 h-8 w-[260px] border-primary-500 ${errors.excerpt ? 'border-red-500' : ''}`}
           {...register('excerpt', { required: 'Excerpt is required' })}
         ></textarea>
         {errors.excerpt && (
@@ -193,11 +223,12 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
       </div>
       
       <div>
-        <label htmlFor="content" className="label">Content</label>
+        <label htmlFor="content" className="label text-black">Content:</label>
         <textarea
           id="content"
+          cols={600}
           rows={10}
-          className={`input ${errors.content ? 'border-red-500' : ''}`}
+          className={`input text-black mx-3 px-2 h-8 w-[260px] border-primary-500 ${errors.content ? 'border-red-500' : ''}`}
           {...register('content', { required: 'Content is required' })}
         ></textarea>
         {errors.content && (
@@ -206,11 +237,11 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
       </div>
       
       <div>
-        <label htmlFor="tags" className="label">Tags (comma-separated)</label>
+        <label htmlFor="tags" className="label text-black">Tags (comma-separated):</label>
         <input
           id="tags"
           type="text"
-          className={`input ${errors.tags ? 'border-red-500' : ''}`}
+          className={`input text-black mx-3 px-2 h-8 w-[260px] border-primary-500 ${errors.tags ? 'border-red-500' : ''}`}
           placeholder="luxury, real estate, lifestyle"
           {...register('tags')}
         />
@@ -229,7 +260,7 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
         <button
           type="button"
           onClick={onSuccess}
-          className="btn btn-outline"
+          className="btn btn-outline text-red-400"
         >
           Cancel
         </button>

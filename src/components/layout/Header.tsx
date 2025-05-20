@@ -43,7 +43,7 @@ export default function Header() {
 
   return (
     <header className={headerClass}>
-      <div className="container flex items-center justify-between px-6">
+      <div className="container flex items-center justify-between px-5">
         <Link to="/" className="font-serif text-3xl font-bold text-secondary-900">
         <img
             src="/logo.png"
@@ -58,7 +58,7 @@ export default function Header() {
             <Link
               key={link.path}
               to={link.path}
-              className={`font-medium transition-colors hover:text-primary-500 ${
+              className={`font-medium transition-colors text-black hover:text-primary-500 ${
                 location.pathname === link.path
                   ? 'text-primary-500'
                   : isScrolled || !isHomePage
@@ -81,7 +81,7 @@ export default function Header() {
                 {user.email?.endsWith('@admin.com') && (
                   <Link
                     to="/admin"
-                    className="block px-4 py-2 text-sm text-secondary-700 hover:bg-cream-100"
+                    className="block px-4 py-2 text-sm text-black hover:bg-cream-100"
                     onClick={closeMenu}
                   >
                     Admin Dashboard
@@ -149,7 +149,7 @@ export default function Header() {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`py-2 font-medium ${
+                  className={`py-2 text-black font-medium ${
                     location.pathname === link.path
                       ? 'text-primary-500'
                       : 'text-secondary-800'
@@ -186,7 +186,7 @@ export default function Header() {
               ) : (
                 <Link
                   to="/login"
-                  className="py-2 font-medium text-secondary-800"
+                  className="py-2 text-black font-medium text-secondary-800"
                   onClick={closeMenu}
                 >
                   Sign In

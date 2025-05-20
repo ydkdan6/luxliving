@@ -31,7 +31,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <div className="flex flex-col flex-grow pt-5 overflow-y-auto bg-secondary-950 text-white">
           <div className="px-4 mb-6">
             <Link to="/admin" className="font-serif text-2xl font-bold">
-              Luxe<span className="text-primary-400">Living</span>
+              Buy<span className="text-primary-400">DubaiLuxury</span>
             </Link>
             <p className="mt-1 text-sm text-cream-400">Admin Dashboard</p>
           </div>
@@ -64,7 +64,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       {/* Mobile header */}
       <div className="md:hidden bg-secondary-950 text-white p-4 flex items-center justify-between">
         <Link to="/admin" className="font-serif text-2xl font-bold">
-          Luxe<span className="text-primary-400">Living</span>
+          Buy<span className="text-primary-400">DubaiLuxury</span>
         </Link>
         {/* Mobile menu button would go here */}
       </div>

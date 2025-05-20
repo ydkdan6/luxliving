@@ -14,6 +14,11 @@ export interface BlogPost {
   tags: string[];
 }
 
+export interface User {
+  id:string;
+  email: string;
+}
+
 export interface BlogCategory {
   id: string;
   name: string;
