@@ -43,7 +43,7 @@ export default function Header() {
 
   return (
     <header className={headerClass}>
-      <div className="container flex items-center justify-between">
+      <div className="container flex items-center justify-between px-6">
         <Link to="/" className="font-serif text-3xl font-bold text-secondary-900">
         <img
             src="/logo.png"
