@@ -48,7 +48,7 @@ export default function Header() {
         <img
             src="/logo.png"
             alt="Luxury Property"
-            className="w-[180px] h-[74px]"
+            className="w-[230px] h-[99px]"
           />
         </Link>
 
@@ -76,7 +76,7 @@ export default function Header() {
               </button>
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-sm shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <div className="p-3 border-b border-cream-200">
-                  <p className="text-sm font-medium">{user.email}</p>
+                  <p className="text-sm font-medium text-black">{user.email?.substring(0,9)}</p>
                 </div>
                 {user.email?.endsWith('@admin.com') && (
                   <Link
@@ -89,7 +89,7 @@ export default function Header() {
                 )}
                 <button
                   onClick={() => signOut()}
-                  className="block w-full text-left px-4 py-2 text-sm text-secondary-700 hover:bg-cream-100"
+                  className="block w-full text-left px-4 py-2 text-sm text-secondary-950 hover:bg-cream-100"
                 >
                   Sign Out
                 </button>
@@ -144,7 +144,7 @@ export default function Header() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-white shadow-lg"
           >
-            <nav className="container py-4 flex flex-col space-y-4">
+            <nav className="container py-4 px-6 flex flex-col space-y-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
@@ -162,7 +162,7 @@ export default function Header() {
               {user ? (
                 <>
                   <div className="py-2 border-t border-cream-200">
-                    <p className="text-sm font-medium">{user.email}</p>
+                    <p className="text-sm font-medium text-black">{user.email}</p>
                   </div>
                   {user.email?.endsWith('@admin.com') && (
                     <Link

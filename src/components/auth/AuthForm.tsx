@@ -57,7 +57,7 @@ export default function AuthForm() {
   };
 
   return (
-    <div className="bg-white rounded-sm shadow-md p-6 md:p-8 w-full max-w-md">
+    <div className="bg-secondary-950 rounded-sm shadow-md p-6 md:p-8 w-full max-w-md">
       <h2 className="text-3xl font-medium text-center mb-6">
         {authMode === 'login' ? 'Sign In' : 'Create Account'}
       </h2>
@@ -69,7 +69,7 @@ export default function AuthForm() {
             <input
               id="email"
               type="email"
-              className={`input ${errors.email ? 'border-red-500' : ''}`}
+              className={`input text-black mx-3 px-2 h-8 w-[290px] rounded-sm ${errors.email ? 'border-red-500' : ''}`}
               {...register('email', { 
                 required: 'Email is required',
                 pattern: {
@@ -88,7 +88,7 @@ export default function AuthForm() {
             <input
               id="password"
               type="password"
-              className={`input ${errors.password ? 'border-red-500' : ''}`}
+              className={`input text-black  mx-3 px-2 h-8 w-[260px] rounded-sm ${errors.password ? 'border-red-500' : ''}`}
               {...register('password', { 
                 required: 'Password is required',
                 minLength: {

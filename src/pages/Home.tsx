@@ -9,7 +9,7 @@ import Layout from '../components/layout/Layout';
 import BlogCard from '../components/ui/BlogCard';
 import PropertyCard from '../components/ui/PropertyCard';
 import ContactForm from '../components/forms/ContactForm';
-import WelcomeModal from '../components/WelcomeModal';
+// import WelcomeModal from '../components/WelcomeModal';
 import NewsletterSignup from '../components/NewsletterSignup';
 
 export default function HomePage() {
@@ -44,7 +44,7 @@ export default function HomePage() {
   return (
     <Layout>
       <Toaster position="top-right" />
-      <WelcomeModal isOpen={showWelcomeModal} onClose={() => setShowWelcomeModal(false)} />
+      {/* <WelcomeModal isOpen={showWelcomeModal} onClose={() => setShowWelcomeModal(false)} /> */}
 
       {/* Hero Section */}
       <section className="relative h-screen pl-5">
