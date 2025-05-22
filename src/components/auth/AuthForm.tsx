@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthContext';
+import emailjs from '@emailjs/browser';
+import toast from 'react-hot-toast';
 
 type FormData = {
   email: string;
@@ -16,7 +18,7 @@ export default function AuthForm() {
   const [errorMessage, setErrorMessage] = useState('');
   const { signIn, signUp } = useAuth();
   const navigate = useNavigate();
-  
+
   const {
     register,
     handleSubmit,
@@ -28,20 +30,39 @@ export default function AuthForm() {
     setErrorMessage('');
   };
 
+  const sendWelcomeEmail = async (email: string) => {
+    try {
+      const templateParams = { email };
+      const result = await emailjs.send(
+        'service_57nol3a',
+        'template_gm8d86w',
+        templateParams,
+        'EOes8PhsHrtTL6H9z'
+      );
+      console.log('Welcome email sent:', result.text);
+    } catch (error) {
+      console.error('Failed to send welcome email:', error);
+    }
+  };
+
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     setErrorMessage('');
-    
+
     try {
       if (authMode === 'login') {
         const { error } = await signIn(data.email, data.password);
         if (error) throw error;
+
+        toast.success('Signed in successfully!');
         navigate('/');
       } else {
         const { error } = await signUp(data.email, data.password);
         if (error) throw error;
-        setErrorMessage('');
-        // Show success message for registration
+
+        await sendWelcomeEmail(data.email);
+
+        toast.success('Account created successfully!');
         navigate('/');
       }
     } catch (error) {
@@ -61,7 +82,7 @@ export default function AuthForm() {
       <h2 className="text-3xl font-medium text-center mb-6">
         {authMode === 'login' ? 'Sign In' : 'Create Account'}
       </h2>
-      
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4">
           <div>
@@ -70,31 +91,31 @@ export default function AuthForm() {
               id="email"
               type="email"
               className={`input text-black mx-3 px-2 h-8 w-[290px] rounded-sm ${errors.email ? 'border-red-500' : ''}`}
-              {...register('email', { 
+              {...register('email', {
                 required: 'Email is required',
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                   message: 'Invalid email address',
-                }
+                },
               })}
             />
             {errors.email && (
               <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
             )}
           </div>
-          
+
           <div>
             <label htmlFor="password" className="label">Password</label>
             <input
               id="password"
               type="password"
-              className={`input text-black  mx-3 px-2 h-8 w-[260px] rounded-sm ${errors.password ? 'border-red-500' : ''}`}
-              {...register('password', { 
+              className={`input text-black mx-3 px-2 h-8 w-[260px] rounded-sm ${errors.password ? 'border-red-500' : ''}`}
+              {...register('password', {
                 required: 'Password is required',
                 minLength: {
                   value: 6,
                   message: 'Password must be at least 6 characters',
-                }
+                },
               })}
             />
             {errors.password && (
@@ -102,34 +123,34 @@ export default function AuthForm() {
             )}
           </div>
         </div>
-        
+
         {errorMessage && (
           <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-sm">
             {errorMessage}
           </div>
         )}
-        
+
         <button
           type="submit"
           className="mt-6 btn btn-primary w-full"
           disabled={isSubmitting}
         >
-          {isSubmitting 
-            ? 'Processing...' 
-            : authMode === 'login' 
-              ? 'Sign In' 
+          {isSubmitting
+            ? 'Processing...'
+            : authMode === 'login'
+              ? 'Sign In'
               : 'Create Account'}
         </button>
       </form>
-      
+
       <div className="mt-6 text-center">
         <button
           type="button"
           onClick={toggleAuthMode}
           className="text-primary-500 hover:text-primary-700"
         >
-          {authMode === 'login' 
-            ? "Don't have an account? Sign up" 
+          {authMode === 'login'
+            ? "Don't have an account? Sign up"
             : 'Already have an account? Sign in'}
         </button>
       </div>

@@ -108,7 +108,7 @@ export default function Dashboard() {
     <AdminLayout>
       <div className="mb-6">
         <h1 className="text-3xl font-medium text-secondary-900">Dashboard</h1>
-        <p className="mt-1 text-secondary-600">Welcome to your admin dashboard.</p>
+        <p className="mt-1 text-secondary-900">Welcome to your admin dashboard.</p>
       </div>
 
       {isLoading ? (
@@ -127,7 +127,7 @@ export default function Dashboard() {
                     <stat.icon size={24} />
                   </div>
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-secondary-600">
+                    <p className="text-sm font-medium text-secondary-900">
                       {stat.title}
                     </p>
                     <p className="text-2xl font-semibold text-secondary-900">
@@ -138,7 +138,7 @@ export default function Dashboard() {
                 <div className="mt-4">
                   <Link
                     to={stat.path}
-                    className="flex items-center text-sm font-medium text-primary-600 hover:text-primary-800"
+                    className="flex items-center text-sm font-medium text-secondary-900 hover:text-primary-800"
                   >
                     View Details
                     <Eye size={16} className="ml-1" />
@@ -158,7 +158,7 @@ export default function Dashboard() {
                 </h2>
                 <Link
                   to="/admin/inquiries"
-                  className="text-sm font-medium text-primary-600 hover:text-primary-800"
+                  className="text-sm font-medium text-secondary-900 hover:text-primary-800"
                 >
                   View All
                 </Link>
@@ -175,7 +175,7 @@ export default function Dashboard() {
                         <p className="font-medium">
                           {inquiry.first_name} {inquiry.last_name}
                         </p>
-                        <p className="text-sm text-secondary-500">
+                        <p className="text-sm text-secondary-900">
                           {new Date(inquiry.created_at).toLocaleDateString()}
                         </p>
                       </div>
@@ -190,7 +190,7 @@ export default function Dashboard() {
                   ))}
                 </div>
               ) : (
-                <p className="text-secondary-500">No recent inquiries.</p>
+                <p className="text-secondary-900">No recent inquiries.</p>
               )}
             </div>
 
@@ -203,7 +203,7 @@ export default function Dashboard() {
               <div className="space-y-4">
                 <div className="p-4 bg-cream-50 rounded-sm">
                   <div className="flex items-center justify-between">
-                    <p className="font-medium">Website Traffic</p>
+                    <p className="font-medium text-secondary-900">Website Traffic</p>
                     <div className="flex items-center text-green-600">
                       <TrendingUp size={16} className="mr-1" />
                       <span>32% ↑</span>
@@ -216,7 +216,7 @@ export default function Dashboard() {
                 
                 <div className="p-4 bg-cream-50 rounded-sm">
                   <div className="flex items-center justify-between">
-                    <p className="font-medium">New Inquiries</p>
+                    <p className="font-medium text-secondary-900">New Inquiries</p>
                     <div className="flex items-center text-green-600">
                       <TrendingUp size={16} className="mr-1" />
                       <span>12% ↑</span>
@@ -229,7 +229,7 @@ export default function Dashboard() {
                 
                 <div className="p-4 bg-cream-50 rounded-sm">
                   <div className="flex items-center justify-between">
-                    <p className="font-medium">Blog Engagement</p>
+                    <p className="font-medium text-secondary-900">Blog Engagement</p>
                     <div className="flex items-center text-green-600">
                       <TrendingUp size={16} className="mr-1" />
                       <span>28% ↑</span>

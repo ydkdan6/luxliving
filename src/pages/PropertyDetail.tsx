@@ -166,7 +166,7 @@ export default function PropertyDetail() {
                 <h3 className="mb-4 text-2xl font-medium">Location</h3>
                 <div className="aspect-[16/9] bg-cream-200 rounded-sm">
                   {/* Map would go here in a real implementation */}
-                  <div className="flex items-center justify-center h-full text-secondary-500">
+                  <div className="flex items-center justify-center h-full text-secondary-900">
                     <p>Map showing {property.address}</p>
                   </div>
                 </div>
@@ -205,7 +205,7 @@ export default function PropertyDetail() {
                           <p className="text-primary-600 font-medium">
                             {formatCurrency(similarProperty.price)}
                           </p>
-                          <div className="flex mt-1 text-xs text-secondary-500 space-x-2">
+                          <div className="flex mt-1 text-xs text-secondary-900 space-x-2">
                             <span>{similarProperty.bedrooms} bd</span>
                             <span>•</span>
                             <span>{similarProperty.bathrooms} ba</span>

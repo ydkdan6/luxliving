@@ -108,13 +108,13 @@ export default function PropertyForm({ property, onSuccess }: PropertyFormProps)
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-secondary-900 ">
       <div>
-        <label htmlFor="title" className="label">Property Title</label>
+        <label htmlFor="title" className="label text-secondary-900 mr-4">Property Title</label>
         <input
           id="title"
           type="text"
-          className={`input ${errors.title ? 'border-red-500' : ''}`}
+          className={`input text-secondary-900 mr-4 ${errors.title ? 'border-red-500' : ''}`}
           {...register('title', { required: 'Title is required' })}
         />
         {errors.title && (
@@ -144,13 +144,13 @@ export default function PropertyForm({ property, onSuccess }: PropertyFormProps)
       </div>
       
       <div>
-        <label htmlFor="price" className="label">Price</label>
+        <label htmlFor="price" className="label text-secondary-900 mr-4">Price</label>
         <input
           id="price"
           type="number"
           step="0.01"
           min="0"
-          className={`input ${errors.price ? 'border-red-500' : ''}`}
+          className={`input text-secondary-900${errors.price ? 'border-red-500' : ''}`}
           {...register('price', { 
             required: 'Price is required',
             min: {
@@ -165,11 +165,11 @@ export default function PropertyForm({ property, onSuccess }: PropertyFormProps)
       </div>
       
       <div>
-        <label htmlFor="image_url" className="label">Feature Image URL</label>
+        <label htmlFor="image_url" className="label text-secondary-900 mr-4">Feature Image URL</label>
         <input
           id="image_url"
           type="text"
-          className={`input ${errors.image_url ? 'border-red-500' : ''}`}
+          className={`input text-secondary-900 mr-4${errors.image_url ? 'border-red-500' : ''}`}
           {...register('image_url', { required: 'Image URL is required' })}
         />
         {errors.image_url && (
@@ -178,7 +178,7 @@ export default function PropertyForm({ property, onSuccess }: PropertyFormProps)
       </div>
       
       <div>
-        <label htmlFor="address" className="label">Address</label>
+        <label htmlFor="address" className="label mr-4">Address</label>
         <input
           id="address"
           type="text"
@@ -192,7 +192,7 @@ export default function PropertyForm({ property, onSuccess }: PropertyFormProps)
       
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <div>
-          <label htmlFor="bedrooms" className="label">Bedrooms</label>
+          <label htmlFor="bedrooms" className="label mr-4">Bedrooms</label>
           <input
             id="bedrooms"
             type="number"
@@ -226,7 +226,7 @@ export default function PropertyForm({ property, onSuccess }: PropertyFormProps)
             id="square_feet"
             type="number"
             min="0"
-            className={`input ${errors.square_feet ? 'border-red-500' : ''}`}
+            className={`input ou3tline3-black${errors.square_feet ? 'border-red-500' : ''}`}
             {...register('square_feet', { required: 'Required' })}
           />
           {errors.square_feet && (
@@ -236,11 +236,11 @@ export default function PropertyForm({ property, onSuccess }: PropertyFormProps)
       </div>
       
       <div>
-        <label htmlFor="description" className="label">Description</label>
+        <label htmlFor="description" className="label mr-4">Description</label>
         <textarea
           id="description"
           rows={6}
-          className={`input ${errors.description ? 'border-red-500' : ''}`}
+          className={`input border-black ${errors.description ? 'border-red-500' : ''}`}
           {...register('description', { required: 'Description is required' })}
         ></textarea>
         {errors.description && (
@@ -249,7 +249,7 @@ export default function PropertyForm({ property, onSuccess }: PropertyFormProps)
       </div>
       
       <div>
-        <label htmlFor="features" className="label">Features (comma-separated)</label>
+        <label htmlFor="features" className="label mr-4">Features (comma-separated)</label>
         <input
           id="features"
           type="text"

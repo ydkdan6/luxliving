@@ -208,7 +208,7 @@ export default function BlogPost() {
                       >
                         <div className="flex justify-between mb-4">
                           <div className="font-medium">{comment.user_name}</div>
-                          <time className="text-sm text-secondary-500">
+                          <time className="text-sm text-secondary-900">
                             {formatDate(comment.created_at)}
                           </time>
                         </div>
@@ -217,7 +217,7 @@ export default function BlogPost() {
                     ))}
                   </div>
                 ) : (
-                  <p className="text-secondary-500">
+                  <p className="text-secondary-900">
                     No comments yet. Be the first to comment!
                   </p>
                 )}
@@ -250,7 +250,7 @@ export default function BlogPost() {
                           >
                             {relatedPost.title}
                           </Link>
-                          <p className="mt-1 text-sm text-secondary-500">
+                          <p className="mt-1 text-sm text-secondary-900">
                             {formatDate(relatedPost.created_at)}
                           </p>
                         </div>

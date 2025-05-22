@@ -122,7 +122,7 @@ export default function BlogPosts() {
           />
         </div>
       ) : isLoading ? (
-        <div className="text-center py-12">Loading blog posts...</div>
+        <div className="text-center text-secondary-900 py-12">Loading blog posts...</div>
       ) : (
         <div className="bg-white rounded-sm shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
@@ -131,31 +131,31 @@ export default function BlogPosts() {
                 <tr>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-secondary-900 uppercase tracking-wider"
                   >
                     Title
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-secondary-900 uppercase tracking-wider"
                   >
                     Category
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-secondary-900 uppercase tracking-wider"
                   >
                     Published
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-secondary-900 uppercase tracking-wider"
                   >
                     Author
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-right text-xs font-medium text-secondary-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-right text-xs font-medium text-secondary-900 uppercase tracking-wider"
                   >
                     Actions
                   </th>
@@ -169,19 +169,19 @@ export default function BlogPosts() {
                         <div className="text-sm font-medium text-secondary-900">
                           {post.title}
                         </div>
-                        <div className="text-sm text-secondary-500">
+                        <div className="text-sm text-secondary-900">
                           {post.slug}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-primary-100 text-primary-800">
+                        <span className="px-2 inline-flex text-xs leading-5 font-semibold text-secondary-900 rounded-full bg-primary-100 text-primary-800">
                           {post.category_name}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-secondary-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-secondary-900">
                         {formatDate(post.created_at)}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-secondary-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-secondary-900">
                         {post.author_name || 'Admin'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -212,7 +212,7 @@ export default function BlogPosts() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={5} className="px-6 py-4 text-center text-secondary-500">
+                    <td colSpan={5} className="px-6 py-4 text-center text-secondary-900">
                       No blog posts found. Create your first post!
                     </td>
                   </tr>

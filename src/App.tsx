@@ -10,7 +10,8 @@ import PropertyDetail from './pages/PropertyDetail';
 import Login from './pages/Login'; 
 import About from './pages/About';
 import Contact from './pages/Contact';
-import AuthHashHandler from './pages/AuthCallbackPage';
+// import AuthHashHandler from './pages/AuthCallbackPage';
+import { Toaster } from 'react-hot-toast';
 
 // Admin Pages
 import Dashboard from './pages/admin/Dashboard';
@@ -21,9 +22,11 @@ import AuthHandler from './pages/AuthCallbackPage';
 
 function App() {
   return (
+    <>
+     <Toaster position="top-right" />
     <Routes>
       {/* Public Routes */}
-      <Route path="/" element={<AuthHandler />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/blog" element={<Blog />} />
@@ -31,7 +34,7 @@ function App() {
       <Route path="/properties" element={<Properties />} />
       <Route path="/properties/:slug" element={<PropertyDetail />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/auth/callback" element={<AuthHashHandler />} />
+      {/* <Route path="/auth/callback" element={<AuthHashHandler />} /> */}
       
       {/* Admin Routes */}
       <Route path="/admin" element={<Dashboard />} />
@@ -39,6 +42,7 @@ function App() {
       <Route path="/admin/properties" element={<AdminProperties />} />
       <Route path="/admin/inquiries" element={<AdminInquiries />} />
     </Routes>
+    </>
   );
 }
 

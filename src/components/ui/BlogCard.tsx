@@ -37,7 +37,7 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
           <span className="inline-block px-3 py-1 mb-2 text-xs font-medium uppercase rounded-sm text-primary-700 bg-secondary-900">
             {post.category_name}
           </span>
-          <time className="text-sm text-secondary-500">
+          <time className="text-sm text-secondary-900">
             {formatDate(post.created_at)}
           </time>
         </div>

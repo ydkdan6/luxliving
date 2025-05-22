@@ -97,7 +97,7 @@ export default function Inquiries() {
                         <p className="text-sm text-secondary-600 mt-1">
                           {inquiry.email}
                         </p>
-                        <p className="text-sm text-secondary-500 mt-1">
+                        <p className="text-sm text-secondary-900 mt-1">
                           {new Date(inquiry.created_at).toLocaleDateString()}
                         </p>
                       </div>
@@ -136,7 +136,7 @@ export default function Inquiries() {
                     </div>
                     <button
                       onClick={() => handleDelete(selectedInquiry.id)}
-                      className="p-2 text-secondary-500 hover:text-red-600 rounded-full hover:bg-red-50"
+                      className="p-2 text-secondary-900 hover:text-red-600 rounded-full hover:bg-red-50"
                     >
                       <X size={20} />
                     </button>
@@ -144,19 +144,19 @@ export default function Inquiries() {
 
                   <div className="grid grid-cols-2 gap-4 mb-6">
                     <div className="p-4 bg-cream-50 rounded-sm">
-                      <p className="text-sm text-secondary-500 mb-1">Email</p>
+                      <p className="text-sm text-secondary-900 mb-1">Email</p>
                       <p className="font-medium">{selectedInquiry.email}</p>
                     </div>
                     <div className="p-4 bg-cream-50 rounded-sm">
-                      <p className="text-sm text-secondary-500 mb-1">Phone</p>
+                      <p className="text-sm text-secondary-900 mb-1">Phone</p>
                       <p className="font-medium">{selectedInquiry.phone}</p>
                     </div>
                     <div className="p-4 bg-cream-50 rounded-sm">
-                      <p className="text-sm text-secondary-500 mb-1">Property Type Interest</p>
+                      <p className="text-sm text-secondary-900 mb-1">Property Type Interest</p>
                       <p className="font-medium">{selectedInquiry.property_type}</p>
                     </div>
                     <div className="p-4 bg-cream-50 rounded-sm">
-                      <p className="text-sm text-secondary-500 mb-1">Contact Date</p>
+                      <p className="text-sm text-secondary-900 mb-1">Contact Date</p>
                       <p className="font-medium">
                         {new Date(selectedInquiry.created_at).toLocaleDateString()}
                       </p>

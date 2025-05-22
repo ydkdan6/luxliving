@@ -37,7 +37,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
             {property.title}
           </h3>
         </Link>
-        <p className="text-sm text-secondary-500 mb-4">{property.address}</p>
+        <p className="text-sm text-secondary-900 mb-4">{property.address}</p>
         
         <div className="flex items-center justify-between mb-4 text-secondary-600">
           <div className="flex items-center">

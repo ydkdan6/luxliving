@@ -95,7 +95,7 @@ export default function Properties() {
 
       {isEditing ? (
         <div className="bg-white p-6 rounded-sm shadow-sm">
-          <h2 className="text-2xl font-medium mb-6">
+          <h2 className="text-2xl font-medium mb-6 text-secondary-900">
             {selectedProperty ? 'Edit Property' : 'Add New Property'}
           </h2>
           <PropertyForm
@@ -104,7 +104,7 @@ export default function Properties() {
           />
         </div>
       ) : isLoading ? (
-        <div className="text-center py-12">Loading properties...</div>
+        <div className="text-center text-secondary-900 py-12">Loading properties...</div>
       ) : (
         <div className="bg-white rounded-sm shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
@@ -113,31 +113,31 @@ export default function Properties() {
                 <tr>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-secondary-900 uppercase tracking-wider"
                   >
                     Property
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-secondary-900 uppercase tracking-wider"
                   >
                     Price
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-secondary-900 uppercase tracking-wider"
                   >
                     Specs
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-secondary-900 uppercase tracking-wider"
                   >
                     Listed
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-right text-xs font-medium text-secondary-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-right text-xs font-medium text-secondary-900 uppercase tracking-wider"
                   >
                     Actions
                   </th>
@@ -160,22 +160,22 @@ export default function Properties() {
                             <div className="text-sm font-medium text-secondary-900">
                               {property.title}
                             </div>
-                            <div className="text-sm text-secondary-500">
+                            <div className="text-sm text-secondary-900">
                               {property.address}
                             </div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-primary-600">
+                        <div className="text-sm font-medium text-secondary-900">
                           {formatCurrency(property.price)}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-secondary-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-secondary-900">
                         <div>{property.bedrooms} bd | {property.bathrooms} ba</div>
                         <div>{property.square_feet.toLocaleString()} sqft</div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-secondary-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-secondary-900">
                         {new Date(property.created_at).toLocaleDateString()}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -206,7 +206,7 @@ export default function Properties() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={5} className="px-6 py-4 text-center text-secondary-500">
+                    <td colSpan={5} className="px-6 py-4 text-center text-secondary-900">
                       No properties found. Add your first property!
                     </td>
                   </tr>
@@ -221,20 +221,20 @@ export default function Properties() {
       {showConfirmDelete && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-sm shadow-lg max-w-md w-full">
-            <h3 className="text-xl font-medium mb-4">Confirm Delete</h3>
+            <h3 className="text-xl font-medium mb-4 text-secondary-900">Confirm Delete</h3>
             <p className="text-secondary-600 mb-6">
               Are you sure you want to delete this property? This action cannot be undone.
             </p>
             <div className="flex justify-end space-x-4">
               <button
                 onClick={() => setShowConfirmDelete(false)}
-                className="btn btn-outline"
+                className="btn btn-outline text-secondary-900 rounded-sm"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDeleteConfirm}
-                className="btn bg-red-600 hover:bg-red-700 text-white"
+                className="btn bg-red-600 hover:bg-red-700 text-white w-20 rounded-sm"
               >
                 Delete
               </button>
