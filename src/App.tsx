@@ -10,19 +10,20 @@ import PropertyDetail from './pages/PropertyDetail';
 import Login from './pages/Login'; 
 import About from './pages/About';
 import Contact from './pages/Contact';
-import AuthCallbackPage from './pages/AuthCallbackPage';
+import AuthHashHandler from './pages/AuthCallbackPage';
 
 // Admin Pages
 import Dashboard from './pages/admin/Dashboard';
 import AdminBlogPosts from './pages/admin/BlogPosts';
 import AdminProperties from './pages/admin/Properties';
 import AdminInquiries from './pages/admin/Inquiries';
+import AuthHandler from './pages/AuthCallbackPage';
 
 function App() {
   return (
     <Routes>
       {/* Public Routes */}
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<AuthHandler />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/blog" element={<Blog />} />
@@ -30,7 +31,7 @@ function App() {
       <Route path="/properties" element={<Properties />} />
       <Route path="/properties/:slug" element={<PropertyDetail />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/auth/callback" element={<AuthCallbackPage />} />
+      <Route path="/auth/callback" element={<AuthHashHandler />} />
       
       {/* Admin Routes */}
       <Route path="/admin" element={<Dashboard />} />
