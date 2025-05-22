@@ -10,6 +10,7 @@ import PropertyDetail from './pages/PropertyDetail';
 import Login from './pages/Login'; 
 import About from './pages/About';
 import Contact from './pages/Contact';
+import AuthCallbackPage from './pages/AuthCallbackPage';
 
 // Admin Pages
 import Dashboard from './pages/admin/Dashboard';
@@ -29,6 +30,7 @@ function App() {
       <Route path="/properties" element={<Properties />} />
       <Route path="/properties/:slug" element={<PropertyDetail />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/auth/callback" element={<AuthCallbackPage />} />
       
       {/* Admin Routes */}
       <Route path="/admin" element={<Dashboard />} />
