@@ -180,7 +180,7 @@ export default function BlogPost() {
                     {post.tags.map((tag, index) => (
                       <span
                         key={index}
-                        className="px-3 py-1 text-sm bg-cream-100 text-secondary-700 rounded-sm"
+                        className="px-3 py-1 text-sm bg-secondary-900 text-secondary-700 rounded-sm"
                       >
                         {tag}
                       </span>
@@ -261,7 +261,7 @@ export default function BlogPost() {
               )}
 
               {/* Categories */}
-              <div className="mt-8 p-6 bg-cream-50 rounded-sm">
+              <div className="mt-8 p-6 bg-secondary-950 rounded-sm">
                 <h3 className="mb-6 text-xl font-medium">Categories</h3>
                 <ul className="space-y-2">
                   <li>

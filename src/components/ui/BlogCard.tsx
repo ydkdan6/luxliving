@@ -34,7 +34,7 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
         className={`flex flex-col p-6 ${featured ? 'md:w-1/2 md:p-8' : ''}`}
       >
         <div className="mb-2">
-          <span className="inline-block px-3 py-1 mb-2 text-xs font-medium uppercase rounded-sm text-primary-700 bg-primary-100">
+          <span className="inline-block px-3 py-1 mb-2 text-xs font-medium uppercase rounded-sm text-primary-700 bg-secondary-900">
             {post.category_name}
           </span>
           <time className="text-sm text-secondary-500">
@@ -50,11 +50,11 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
             {post.title}
           </h3>
         </Link>
-        <p className="mb-4 text-secondary-600">{post.excerpt}</p>
+        <p className="mb-4 text-primary-900">{post.excerpt}</p>
         <div className="mt-auto">
           <Link
             to={`/blog/${post.slug}`}
-            className="inline-flex items-center font-medium transition-colors text-primary-500 hover:text-primary-700"
+            className="inline-flex items-center font-medium transition-colors text-primary-900 hover:text-primary-700"
           >
             Read Article
             <svg

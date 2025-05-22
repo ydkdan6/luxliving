@@ -22,33 +22,25 @@ interface BlogPostFormProps {
 export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [existingUserID, setExistingUserID] = useState<string | null>(null);
-  
-  // Fetch an existing user ID from the users table
+  const [userID, setUserID] = useState<string | null>(null);
+
+  // ✅ Fetch current logged-in user's ID
   useEffect(() => {
-    async function fetchExistingUser() {
-      try {
-        const { data, error } = await supabase
-          .from('users')
-          .select('id')
-          .limit(1);
-          
-        if (error) {
-          console.error('Error fetching user:', error);
-          return;
-        }
-        
-        if (data && data.length > 0) {
-          setExistingUserID(data[0].id);
-        }
-      } catch (err) {
-        console.error('Error in fetchExistingUser:', err);
+    async function fetchCurrentUser() {
+      const { data, error } = await supabase.auth.getUser();
+
+      if (error || !data?.user?.id) {
+        console.error('Error fetching logged-in user:', error);
+        setErrorMessage('You must be logged in to create a blog post.');
+        return;
       }
+
+      setUserID(data.user.id);
     }
-    
-    fetchExistingUser();
-  }, []); 
-  
+
+    fetchCurrentUser();
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -68,13 +60,13 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     setErrorMessage('');
-    
+
     try {
       const tagsArray = data.tags
         .split(',')
         .map(tag => tag.trim())
         .filter(tag => tag !== '');
-      
+
       if (post) {
         // Update existing post
         const { error } = await supabase
@@ -90,34 +82,32 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
             updated_at: new Date().toISOString(),
           })
           .match({ id: post.id });
-        
+
         if (error) throw error;
       } else {
         // Create new post
-        if (!existingUserID) {
+        if (!userID) {
           throw new Error("No valid user ID available. Cannot create post without a valid author.");
         }
-        
+
         const { error } = await supabase
           .from('blog_posts')
-          .insert([
-            {
-              title: data.title,
-              slug: data.slug,
-              excerpt: data.excerpt,
-              content: data.content,
-              image_url: data.image_url,
-              category_id: data.category_id,
-              tags: tagsArray,
-              author_id: existingUserID, // Use an existing user ID from the database
-            },
-          ]);
-        
+          .insert([{
+            title: data.title,
+            slug: data.slug,
+            excerpt: data.excerpt,
+            content: data.content,
+            image_url: data.image_url,
+            category_id: data.category_id,
+            tags: tagsArray,
+            author_id: userID,
+          }]);
+
         if (error) throw error;
       }
-      
+
       onSuccess();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving blog post:', error);
       setErrorMessage(`There was an error saving the blog post: ${error.message || 'Please try again.'}`);
     } finally {
@@ -152,18 +142,16 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
           <p className="mt-1 text-sm text-red-500">{errors.title.message}</p>
         )}
       </div>
-      
+
       <div className="flex items-end space-x-4">
         <div className="flex-grow">
           <label htmlFor="slug" className="label text-black">Slug:</label>
-          <div className="flex">
-            <input
-              id="slug"
-              type="text"
-              className={`input text-black mx-3 px-2 h-8 w-[260px] border-primary-500 ${errors.slug ? 'border-red-500' : ''}`}
-              {...register('slug', { required: 'Slug is required' })}
-            />
-          </div>
+          <input
+            id="slug"
+            type="text"
+            className={`input text-black mx-3 px-2 h-8 w-[260px] border-primary-500 ${errors.slug ? 'border-red-500' : ''}`}
+            {...register('slug', { required: 'Slug is required' })}
+          />
           {errors.slug && (
             <p className="mt-1 text-sm text-red-500">{errors.slug.message}</p>
           )}
@@ -175,7 +163,7 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
           Generate from Title
         </button>
       </div>
-      
+
       <div>
         <label htmlFor="category_id" className="label text-black">Category:</label>
         <select
@@ -194,7 +182,7 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
           <p className="mt-1 text-sm text-red-500">{errors.category_id.message}</p>
         )}
       </div>
-      
+
       <div>
         <label htmlFor="image_url" className="label text-black">Feature Image URL:</label>
         <input
@@ -207,35 +195,33 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
           <p className="mt-1 text-sm text-red-500">{errors.image_url.message}</p>
         )}
       </div>
-      
+
       <div>
         <label htmlFor="excerpt" className="label text-black">Excerpt:</label>
         <textarea
           id="excerpt"
-          cols={300}
           rows={3}
-          className={`input text-black mx-3 px-2 h-8 w-[260px] border-primary-500 ${errors.excerpt ? 'border-red-500' : ''}`}
+          className={`input text-black mx-3 px-2 w-[260px] border-primary-500 ${errors.excerpt ? 'border-red-500' : ''}`}
           {...register('excerpt', { required: 'Excerpt is required' })}
         ></textarea>
         {errors.excerpt && (
           <p className="mt-1 text-sm text-red-500">{errors.excerpt.message}</p>
         )}
       </div>
-      
+
       <div>
         <label htmlFor="content" className="label text-black">Content:</label>
         <textarea
           id="content"
-          cols={600}
           rows={10}
-          className={`input text-black mx-3 px-2 h-8 w-[260px] border-primary-500 ${errors.content ? 'border-red-500' : ''}`}
+          className={`input text-black mx-3 px-2 w-[260px] border-primary-500 ${errors.content ? 'border-red-500' : ''}`}
           {...register('content', { required: 'Content is required' })}
         ></textarea>
         {errors.content && (
           <p className="mt-1 text-sm text-red-500">{errors.content.message}</p>
         )}
       </div>
-      
+
       <div>
         <label htmlFor="tags" className="label text-black">Tags (comma-separated):</label>
         <input
@@ -249,13 +235,13 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
           <p className="mt-1 text-sm text-red-500">{errors.tags.message}</p>
         )}
       </div>
-      
+
       {errorMessage && (
         <div className="p-3 bg-red-100 text-red-700 rounded-sm">
           {errorMessage}
         </div>
       )}
-      
+
       <div className="flex justify-end space-x-4">
         <button
           type="button"

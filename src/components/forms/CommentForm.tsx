@@ -26,7 +26,7 @@ export default function CommentForm({ postId, onCommentAdded }: CommentFormProps
 
   if (!user) {
     return (
-      <div className="p-4 bg-cream-100 rounded-sm">
+      <div className="p-4 bg-secondary-900 rounded-sm">
         <p className="text-secondary-700">
           Please <a href="/login" className="text-primary-500 hover:text-primary-700">sign in</a> to leave a comment.
         </p>
@@ -62,16 +62,17 @@ export default function CommentForm({ postId, onCommentAdded }: CommentFormProps
   };
 
   return (
-    <div className="bg-white rounded-sm shadow-md p-6">
+    <div className="bg-secondary-900 rounded-sm shadow-md p-6">
       <h3 className="text-xl font-medium mb-4">Leave a Comment</h3>
       
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor="content" className="label">Your Comment</label>
+          <label htmlFor="content" className="label mr-4">Your Comment:</label>
           <textarea
             id="content"
-            rows={4}
-            className={`input ${errors.content ? 'border-red-500' : ''}`}
+            cols={90}
+            rows={10}
+            className={`input rounded-sm ${errors.content ? 'border-red-500' : ''}`}
             {...register('content', { 
               required: 'Comment content is required',
               minLength: {

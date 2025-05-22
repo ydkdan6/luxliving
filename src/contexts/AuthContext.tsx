@@ -19,41 +19,24 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Dummy admin credentials
-const DUMMY_ADMIN = {
-  email: 'admin@admin.com',
-  password: 'admin123',
-  user: {
-    id: 'dummy-admin-id',
-    email: 'admin@admin.com',
-    role: 'admin',
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-    email_confirmed_at: new Date().toISOString(),
-    last_sign_in_at: new Date().toISOString(),
-    user_metadata: { role: 'admin' },
-    app_metadata: { role: 'admin' }
-  } as User
-};
-
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    // Check for active session on initial load
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user || null);
-      setIsAdmin(false); // Real users are not admin by default
+      const currentUser = session?.user || null;
+      setUser(currentUser);
+      setIsAdmin(currentUser?.email?.endsWith('@admin.com') || false);
       setLoading(false);
     });
 
-    // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_, session) => {
-        setUser(session?.user || null);
-        setIsAdmin(false); // Real users are not admin by default
+        const currentUser = session?.user || null;
+        setUser(currentUser);
+        setIsAdmin(currentUser?.email?.endsWith('@admin.com') || false);
         setLoading(false);
       }
     );
@@ -65,33 +48,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signIn = async (email: string, password: string) => {
     try {
-      // Check for dummy admin credentials first
-      if (email === DUMMY_ADMIN.email && password === DUMMY_ADMIN.password) {
-        setUser(DUMMY_ADMIN.user);
-        setIsAdmin(true);
-        setLoading(false);
-        
-        // Store admin session in localStorage for persistence
-        localStorage.setItem('dummyAdminSession', JSON.stringify({
-          user: DUMMY_ADMIN.user,
-          isAdmin: true,
-          timestamp: Date.now()
-        }));
-        
-        return { data: DUMMY_ADMIN.user, error: null };
-      }
-
-      // Otherwise, try regular Supabase authentication
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
-      
-      if (data?.user) {
-        setIsAdmin(false);
+
+      const signedInUser = data?.user || null;
+
+      if (signedInUser) {
+        setUser(signedInUser);
+        setIsAdmin(signedInUser.email?.endsWith('@admin.com') || false);
       }
-      
-      return { data: data?.user || null, error };
+
+      return { data: signedInUser, error };
     } catch (error) {
       return { data: null, error: error as Error };
     }
@@ -110,37 +79,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signOut = async () => {
-    // Clear dummy admin session
-    localStorage.removeItem('dummyAdminSession');
-    setIsAdmin(false);
-    
-    // Sign out from Supabase
     await supabase.auth.signOut();
+    setUser(null);
+    setIsAdmin(false);
   };
-
-  // Check for persisted admin session on mount
-  useEffect(() => {
-    const savedAdminSession = localStorage.getItem('dummyAdminSession');
-    if (savedAdminSession) {
-      try {
-        const session = JSON.parse(savedAdminSession);
-        const oneHour = 60 * 60 * 1000; // 1 hour in milliseconds
-        
-        // Check if session is less than 1 hour old
-        if (Date.now() - session.timestamp < oneHour) {
-          setUser(session.user);
-          setIsAdmin(session.isAdmin);
-        } else {
-          // Session expired, remove it
-          localStorage.removeItem('dummyAdminSession');
-        }
-      } catch (error) {
-        // Invalid session data, remove it
-        localStorage.removeItem('dummyAdminSession');
-      }
-    }
-    setLoading(false);
-  }, []);
 
   const value = {
     user,
