@@ -58,7 +58,7 @@ export default function Header() {
             <Link
               key={link.path}
               to={link.path}
-              className={`font-medium transition-colors text-black hover:text-primary-500 ${
+              className={`font-medium transition-colors text-white hover:text-primary-500 ${
                 location.pathname === link.path
                   ? 'text-primary-500'
                   : isScrolled || !isHomePage
