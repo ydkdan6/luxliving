@@ -19,6 +19,8 @@ import AdminBlogPosts from './pages/admin/BlogPosts';
 import AdminProperties from './pages/admin/Properties';
 import AdminInquiries from './pages/admin/Inquiries';
 import AuthHandler from './pages/AuthCallbackPage';
+import Admin from './components/admin/ContactList';
+import AdminLayout from './pages/admin/AdminLayout';
 
 function App() {
   return (
@@ -41,6 +43,7 @@ function App() {
       <Route path="/admin/blog-posts" element={<AdminBlogPosts />} />
       <Route path="/admin/properties" element={<AdminProperties />} />
       <Route path="/admin/inquiries" element={<AdminInquiries />} />
+      <Route path="/admin/contact-messages" element={<AdminLayout><Admin /></AdminLayout>} />
     </Routes>
     </>
   );

@@ -70,3 +70,32 @@ export interface PropertyInquiry {
   message: string;
   created_at: string;
 }
+
+export interface Comment {
+  id: string;
+  post_id: string;
+  user_id: string;
+  content: string;
+  created_at: string;
+  user: User;
+}
+
+export interface ContactForm {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  property_type: string;
+  about: string;
+  created_at: string;
+}
+
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  created_at: string;
+  read: boolean;
+}

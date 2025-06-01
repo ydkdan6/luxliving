@@ -20,7 +20,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
     { name: 'Blog Posts', path: '/admin/blog-posts', icon: FileText },
     { name: 'Properties', path: '/admin/properties', icon: Home },
-    { name: 'Inquiries', path: '/admin/inquiries', icon: MailOpen },
+    { name: 'Contact Messages', path: '/admin/contact-messages', icon: MailOpen },
     { name: 'Back to Site', path: '/', icon: Users },
   ];
 
