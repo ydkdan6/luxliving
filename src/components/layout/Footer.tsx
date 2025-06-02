@@ -106,7 +106,7 @@ export default function Footer() {
 
         <div className="pt-8 mt-12 border-t border-secondary-800">
           <p className="text-center text-cream-400">
-            &copy; {currentYear} LuxeLiving. All rights reserved.
+            &copy; {currentYear} BuyDubaiLuxury. All rights reserved.
           </p>
         </div>
       </div>

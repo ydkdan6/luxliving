@@ -496,6 +496,7 @@ function Admin() {
                             {message.name}
                           </h4>
                           <p className="text-xs text-gray-500 mb-1">{message.email}</p>
+                          <p className="text-xs text-gray-500 mb-1">{message.number}</p>
                           <p className="text-sm text-gray-600 line-clamp-2">
                             {message.message}
                           </p>

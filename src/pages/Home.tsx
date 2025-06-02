@@ -41,6 +41,7 @@ export default function Home() {
   const [contactForm, setContactForm] = useState({
     name: '',
     email: '',
+    number: '',
     message: ''
   });
 
@@ -82,7 +83,7 @@ export default function Home() {
       if (error) throw error;
 
       toast.success('Message sent successfully!');
-      setContactForm({ name: '', email: '', message: '' });
+      setContactForm({ name: '', email: '', number: '', message: '' });
       setShowContactForm(false);
     } catch (error) {
       toast.error('Failed to send message. Please try again.');
@@ -187,6 +188,15 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 1.1 }}
               className="flex flex-wrap gap-4"
             >
+
+              <button
+                onClick={() => setShowContactForm(true)}
+                className="group bg-transparent border-2 border-white/30 hover:border-primary-400 text-white hover:text-primary-400 px-8 py-4 rounded-sm font-medium transition-all duration-300 flex items-center gap-3 backdrop-blur-sm"
+              >
+                <MessageSquare size={20} />
+                Contact Us
+              </button>
+
               <Link
                 to='/blog'
                 className="group bg-primary-500 hover:bg-primary-600 text-white px-8 py-4 rounded-sm font-medium transition-all duration-300 flex items-center gap-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
@@ -195,14 +205,6 @@ export default function Home() {
                 Explore Stories
                 <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
               </Link>
-              
-              <button
-                onClick={() => setShowContactForm(true)}
-                className="group bg-transparent border-2 border-white/30 hover:border-primary-400 text-white hover:text-primary-400 px-8 py-4 rounded-sm font-medium transition-all duration-300 flex items-center gap-3 backdrop-blur-sm"
-              >
-                <MessageSquare size={20} />
-                Get in Touch
-              </button>
             </motion.div>
           </motion.div>
         </div>
@@ -325,14 +327,14 @@ export default function Home() {
 
       {/* Contact Form Modal */}
       {showContactForm && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-scroll">
           <motion.div
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             className="bg-white rounded-xl p-8 max-w-lg w-full shadow-2xl"
           >
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center mb-6 scale-75">
               <h3 className="text-3xl font-serif text-secondary-900">Get in Touch</h3>
               <button
                 onClick={() => setShowContactForm(false)}
@@ -366,6 +368,20 @@ export default function Home() {
                   id="email"
                   value={contactForm.email}
                   onChange={(e) => setContactForm(prev => ({ ...prev, email: e.target.value }))}
+                  className="w-full px-4 py-3 text-black border border-secondary-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="number" className="block text-sm font-semibold text-secondary-900 mb-2">
+                  Phone Number
+                </label>
+                <input
+                  type="text"
+                  id="number"
+                  value={contactForm.number}
+                  onChange={(e) => setContactForm(prev => ({ ...prev, number: e.target.value }))}
                   className="w-full px-4 py-3 text-black border border-secondary-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                   required
                 />
