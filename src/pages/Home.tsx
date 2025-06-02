@@ -16,11 +16,19 @@ const heroImages = [
     title: "Dubai Marina Skyline"
   },
   {
-    url: "https://images.pexels.com/photos/3787839/pexels-photo-3787839.jpeg",
+    url: "https://dandbdubai.ae/wp-content/uploads/2023/05/The-10-Most-Beautiful-Places-in-Dubai-1024x683.jpg",
+    title: "Burj Khalifa at Night"
+  },
+   {
+    url: "https://cdn-imgix.headout.com/media/images/b3ff7055fbb17bf08d5b6c399874c98d-Untitled-1.jpg?ar=16%3A10&auto=format&crop=faces%2Ccenter&fit=crop&h=450&q=90&w=720",
+    title: "Burj Khalifa at Night"
+  },
+   {
+    url: "https://www.planetware.com/wpimages/2022/11/united-arab-emirates-dubai-top-attractions-view-dubai-fountain-display.jpg",
     title: "Burj Khalifa at Night"
   },
   {
-    url: "https://images.pexels.com/photos/4110462/pexels-photo-4110462.jpeg",
+    url: "https://images.wanderon.in/blogs/new/2023/06/feature-dubai-marina-skyline-2c8f1708f2a1.jpg",
     title: "Dubai Frame"
   }
 ];
