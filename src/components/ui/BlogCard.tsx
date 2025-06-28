@@ -1,14 +1,4 @@
-const handleShare = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (navigator.share) {
-      navigator.share({
-        title: post.title,
-        text: post.excerpt,
-        url: `/blog/${post.id}`
-      });
-    }
-  };import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Clock, ArrowRight, Heart, MessageCircle, Share2, BookmarkPlus, Eye } from 'lucide-react';
@@ -72,6 +62,18 @@ export default function BlogCard({ post, onOpenContact }: BlogCardProps) {
     }
   };
 
+  const handleShare = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (navigator.share) {
+      navigator.share({
+        title: post.title,
+        text: post.excerpt,
+        url: `/blog/${post.slug}` // Fixed: Use slug instead of id
+      });
+    }
+  };
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 30 }}
@@ -81,7 +83,8 @@ export default function BlogCard({ post, onOpenContact }: BlogCardProps) {
       transition={{ duration: 0.3 }}
       className="group bg-secondary-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-secondary-800/50 hover:border-primary-500/30"
     >
-      <Link to={`/blog/${post.id}`} className="block">
+      {/* Fixed: Use slug instead of id */}
+      <Link to={`/blog/${post.slug}`} className="block">
         <div className="relative h-56 overflow-hidden">
           <motion.img
             src={post.image_url}
@@ -152,8 +155,8 @@ export default function BlogCard({ post, onOpenContact }: BlogCardProps) {
           </div>
         </div>
         
-        {/* Title */}
-        <Link to={`/blog/${post.id}`}>
+        {/* Title - Fixed: Use slug instead of id */}
+        <Link to={`/blog/${post.slug}`}>
           <h3 className="text-xl font-serif font-bold mb-3 text-cream-100 hover:text-primary-400 transition-colors line-clamp-2 group-hover:text-primary-300">
             {post.title}
           </h3>
@@ -202,9 +205,9 @@ export default function BlogCard({ post, onOpenContact }: BlogCardProps) {
             </motion.button>
           </div>
           
-          {/* Read more link */}
+          {/* Read more link - Fixed: Use slug instead of id */}
           <Link
-            to={`/blog/${post.id}`}
+            to={`/blog/${post.slug}`}
             className="group/link inline-flex items-center text-primary-500 hover:text-primary-400 transition-colors text-sm font-medium"
           >
             Read More
