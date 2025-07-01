@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState, useEffect, useRef } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import { supabase } from '../../lib/supabase';
 import { BlogPost, BlogCategory } from '../../types';
+
+// Import Quill
+import Quill from 'quill';
+import 'quill/dist/quill.snow.css';
 
 type FormData = {
   title: string;
@@ -23,6 +27,8 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [userID, setUserID] = useState<string | null>(null);
+  const quillRef = useRef<HTMLDivElement>(null);
+  const quillInstance = useRef<Quill | null>(null);
 
   // ✅ Fetch current logged-in user's ID
   useEffect(() => {
@@ -45,6 +51,9 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
     register,
     handleSubmit,
     formState: { errors },
+    control,
+    setValue,
+    watch,
   } = useForm<FormData>({
     defaultValues: post ? {
       title: post.title,
@@ -54,8 +63,68 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
       image_url: post.image_url,
       category_id: post.category_id,
       tags: post.tags.join(', '),
-    } : undefined,
+    } : {
+      title: '',
+      slug: '',
+      excerpt: '',
+      content: '',
+      image_url: '',
+      category_id: '',
+      tags: '',
+    },
   });
+
+  // Initialize Quill editor
+  useEffect(() => {
+    if (quillRef.current && !quillInstance.current) {
+      // Clear any existing content first
+      quillRef.current.innerHTML = '';
+      
+      // Quill configuration
+      const quillConfig = {
+        theme: 'snow',
+        placeholder: 'Write your blog content here...',
+        modules: {
+          toolbar: [
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'color': [] }, { 'background': [] }],
+            [{ 'script': 'sub'}, { 'script': 'super' }],
+            ['blockquote', 'code-block'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'indent': '-1'}, { 'indent': '+1' }],
+            [{ 'align': [] }],
+            ['link', 'image', 'video'],
+            ['clean']
+          ]
+        }
+      };
+
+      quillInstance.current = new Quill(quillRef.current, quillConfig);
+
+      // Set text color to black by default
+      quillInstance.current.format('color', '#000000');
+
+      // Set initial content if editing existing post
+      if (post?.content) {
+        quillInstance.current.root.innerHTML = post.content;
+      }
+
+      // Listen for text changes and update form value
+      quillInstance.current.on('text-change', () => {
+        const html = quillInstance.current?.root.innerHTML || '';
+        setValue('content', html, { shouldValidate: true });
+      });
+    }
+
+    return () => {
+      // Cleanup
+      if (quillInstance.current) {
+        quillInstance.current.off('text-change');
+        quillInstance.current = null;
+      }
+    };
+  }, []);
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
@@ -209,16 +278,48 @@ export default function BlogPostForm({ post, categories, onSuccess }: BlogPostFo
         )}
       </div>
 
+      {/* Quill WYSIWYG Editor for Content */}
       <div>
-        <label htmlFor="content" className="label text-black">Content:</label>
-        <textarea
-          id="content"
-          rows={10}
-          className={`input text-black mx-3 px-2 w-[260px] border-primary-500 ${errors.content ? 'border-red-500' : ''}`}
-          {...register('content', { required: 'Content is required' })}
-        ></textarea>
+        <label className="label text-black">Content:</label>
+        <div className="mx-3">
+          <Controller
+            name="content"
+            control={control}
+            rules={{ required: 'Content is required' }}
+            render={({ field }) => (
+              <div>
+                <div 
+                  ref={quillRef}
+                  className={`bg-white min-h-[200px] ${errors.content ? 'border-red-500' : 'border-primary-500'}`}
+                  style={{ 
+                    width: '500px',
+                    border: errors.content ? '1px solid #ef4444' : '1px solid #6366f1'
+                  }}
+                />
+                {/* Hidden input to store the content value for form validation */}
+                <input
+                  type="hidden"
+                  {...field}
+                  value={watch('content')}
+                />
+                {/* Custom CSS to ensure text is black */}
+                <style jsx>{`
+                  .ql-editor {
+                    color: #000000 !important;
+                  }
+                  .ql-editor p {
+                    color: #000000 !important;
+                  }
+                  .ql-editor * {
+                    color: inherit !important;
+                  }
+                `}</style>
+              </div>
+            )}
+          />
+        </div>
         {errors.content && (
-          <p className="mt-1 text-sm text-red-500">{errors.content.message}</p>
+          <p className="mt-1 ml-3 text-sm text-red-500">{errors.content.message}</p>
         )}
       </div>
 

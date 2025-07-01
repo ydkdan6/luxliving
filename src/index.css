@@ -39,3 +39,12 @@
     @apply w-full px-4 py-2 border border-secondary-600 rounded-sm focus:outline-none focus:ring-2 focus:ring-primary-500 bg-secondary-950 text-cream-100;
   }
 }
+
+.ql-editor {
+  color: #000000 !important;
+}
+
+.ql-editor p,
+.ql-editor * {
+  color: inherit !important;
+}
