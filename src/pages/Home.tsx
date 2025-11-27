@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ArrowLeft, BookOpen, MessageSquare, Send, TrendingUp, Users, Calendar, Star } from 'lucide-react';
+import { ArrowRight, ArrowLeft, BookOpen, MessageSquare, Send, TrendingUp, Users, Calendar, Star, BadgePercent, DollarSign, Award, Plane, Globe2 } from 'lucide-react';
 import { Toaster, toast } from 'sonner';
 import { supabase } from '../lib/supabase';
 import { BlogPost } from '../types';
@@ -12,7 +12,7 @@ import NewsletterSignup from '../components/NewsletterSignup';
 
 const heroImages = [
   {
-    url: "https://images.pexels.com/photos/618079/pexels-photo-618079.jpeg",
+    url: "https://images.pexels.com/photos/618079/pexels-photo-618079.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop",
     title: "Dubai Marina Skyline"
   },
   {
@@ -20,7 +20,7 @@ const heroImages = [
     title: "Burj Khalifa at Night"
   },
    {
-    url: "https://cdn-imgix.headout.com/media/images/b3ff7055fbb17bf08d5b6c399874c98d-Untitled-1.jpg?ar=16%3A10&auto=format&crop=faces%2Ccenter&fit=crop&h=450&q=90&w=720",
+    url: "https://cdn-imgix.headout.com/media/images/b3ff7055fbb17bf08d5b6c399874c98d-Untitled-1.jpg?ar=16%3A10&auto=format&crop=faces%2Ccenter&fit=crop&h=1080&q=85&w=1920",
     title: "Burj Khalifa at Night"
   },
    {
@@ -30,6 +30,41 @@ const heroImages = [
   {
     url: "https://images.wanderon.in/blogs/new/2023/06/feature-dubai-marina-skyline-2c8f1708f2a1.jpg",
     title: "Dubai Frame"
+  }
+];
+
+const whyChooseUsFeatures = [
+  {
+    icon: BadgePercent,
+    title: "ZERO TAXES",
+    description: "No income or capital gains tax"
+  },
+  {
+    icon: TrendingUp,
+    title: "UP TO 20%",
+    description: "Capital Growth"
+    // description: "Exceptional investment returns"
+  },
+  {
+    icon: DollarSign,
+    title: "10% DOWNPAYMENT",
+    description: "Flexible Payments",
+    // description: "Flexible Payments"
+  },
+  {
+    icon: Award,
+    title: "GOLDEN VISA",
+    description: "10-Year Residency with property investment"
+  },
+  {
+    icon: Plane,
+    title: "WORLD-CLASS INFRASTRUCTURE",
+    description: "Airports unmatched globally"
+  },
+  {
+    icon: Globe2,
+    title: "GLOBAL RECOGNITION",
+    description: "Home to over 200 nationalities"
   }
 ];
 
@@ -52,6 +87,12 @@ export default function Home() {
     number: '',
     message: ''
   });
+  const [heroContactForm, setHeroContactForm] = useState({
+    name: '',
+    email: '',
+    phone: ''
+  });
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   useEffect(() => {
     const fetchFeaturedPosts = async () => {
@@ -98,12 +139,37 @@ export default function Home() {
     }
   };
 
+  const handleHeroContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const { error } = await supabase
+        .from('contact_messages')
+        .insert([{ 
+          name: heroContactForm.name, 
+          email: heroContactForm.email, 
+          number: heroContactForm.phone,
+          message: 'Quick inquiry from hero section' 
+        }]);
+
+      if (error) throw error;
+
+      setShowSuccessModal(true);
+      setHeroContactForm({ name: '', email: '', phone: '' });
+      
+      setTimeout(() => {
+        setShowSuccessModal(false);
+      }, 3000);
+    } catch (error) {
+      toast.error('Failed to send message. Please try again.');
+    }
+  };
+
   return (
     <Layout>
       <Toaster position="top-right" />
 
       {/* Hero Section with Carousel */}
-      <section className="relative h-screen overflow-hidden">
+      <section className="relative h-[700px] overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentImageIndex}
@@ -117,6 +183,8 @@ export default function Home() {
               src={heroImages[currentImageIndex].url}
               alt={heroImages[currentImageIndex].title}
               className="object-cover w-full h-full"
+              loading="eager"
+              fetchpriority="high"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-primary-900/60" />
           </motion.div>
@@ -157,7 +225,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="max-w-4xl text-cream-100"
+            className="max-w-5xl text-cream-100"
           >
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -175,7 +243,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-6xl md:text-7xl font-serif font-bold mb-6 leading-tight"
+              className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 leading-tight"
             >
               Stories That 
               <span className="block text-primary-400 italic">Inspire</span>
@@ -185,7 +253,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
-              className="text-xl md:text-2xl text-cream-200 mb-8 leading-relaxed max-w-2xl"
+              className="text-lg md:text-xl lg:text-2xl text-cream-200 mb-8 leading-relaxed max-w-2xl"
             >
               Dive into a world of luxury, culture, and sophistication. Discover stories that shape perspectives and inspire extraordinary living.
             </motion.p>
@@ -194,12 +262,11 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.1 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap gap-4 mb-12"
             >
-
               <button
                 onClick={() => setShowContactForm(true)}
-                className="group bg-transparent border-2 border-white/30 hover:border-primary-400 text-white hover:text-primary-400 px-8 py-4 rounded-sm font-medium transition-all duration-300 flex items-center gap-3 backdrop-blur-sm"
+                className="group bg-transparent border-2 border-white/30 hover:border-primary-400 text-white hover:text-primary-400 px-6 md:px-8 py-3 md:py-4 rounded-sm font-medium transition-all duration-300 flex items-center gap-3 backdrop-blur-sm text-sm md:text-base"
               >
                 <MessageSquare size={20} />
                 Contact Us
@@ -207,12 +274,59 @@ export default function Home() {
 
               <Link
                 to='/blog'
-                className="group bg-primary-500 hover:bg-primary-600 text-white px-8 py-4 rounded-sm font-medium transition-all duration-300 flex items-center gap-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                className="group bg-primary-500 hover:bg-primary-600 text-white px-6 md:px-8 py-3 md:py-4 rounded-sm font-medium transition-all duration-300 flex items-center gap-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-sm md:text-base"
               >
                 <BookOpen size={20} />
                 Explore Stories
                 <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
               </Link>
+            </motion.div>
+
+            {/* Hero Contact Form - Horizontal Layout */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.3 }}
+              className="w-full"
+            >
+              <div className="bg-white/95 backdrop-blur-md rounded-xl p-4 md:p-6 shadow-2xl max-w-6xl">
+                <form onSubmit={handleHeroContactSubmit} className="flex flex-col md:flex-row gap-3 md:gap-4 items-stretch md:items-center">
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    value={heroContactForm.name}
+                    onChange={(e) => setHeroContactForm(prev => ({ ...prev, name: e.target.value }))}
+                    className="flex-1 px-4 py-3 text-secondary-900 bg-white border border-secondary-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all placeholder:text-secondary-400 text-sm md:text-base"
+                    required
+                  />
+                  
+                  <input
+                    type="email"
+                    placeholder="Your Email"
+                    value={heroContactForm.email}
+                    onChange={(e) => setHeroContactForm(prev => ({ ...prev, email: e.target.value }))}
+                    className="flex-1 px-4 py-3 text-secondary-900 bg-white border border-secondary-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all placeholder:text-secondary-400 text-sm md:text-base"
+                    required
+                  />
+
+                  <input
+                    type="tel"
+                    placeholder="Phone Number"
+                    value={heroContactForm.phone}
+                    onChange={(e) => setHeroContactForm(prev => ({ ...prev, phone: e.target.value }))}
+                    className="flex-1 px-4 py-3 text-secondary-900 bg-white border border-secondary-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all placeholder:text-secondary-400 text-sm md:text-base"
+                    required
+                  />
+                  
+                  <button
+                    type="submit"
+                    className="bg-primary-500 hover:bg-primary-600 text-white py-3 px-6 md:px-8 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl whitespace-nowrap text-sm md:text-base"
+                  >
+                    <Send size={18} />
+                    Submit
+                  </button>
+                </form>
+              </div>
             </motion.div>
           </motion.div>
         </div>
@@ -231,6 +345,70 @@ export default function Home() {
             className="w-0.5 h-8 bg-gradient-to-b from-white/60 to-transparent"
           />
         </motion.div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="py-20 bg-white">
+        <div className=" flex gap-14 justify-center items-center container w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-12"
+          >
+            <h2 className="text-xl md:text-4xl lg:text-5xl font-bold text-secondary-900 mb-6">
+              WHY BuyDubaiLuxury?
+            </h2>
+            <div className="space-y-4 text-secondary-700 leading-relaxed max-w-3xl">
+              <p>
+                Binghatti is an award-winning developer, recognized globally for its innovative design
+                and lifestyle concepts. They've built a proven legacy, <span className="font-bold">delivering over 79+</span> projects in
+                prime Dubai communities.
+              </p>
+              <p>
+                Their commitment to excellence is reflected in their <span className="font-bold">on-time delivery,</span> with projects
+                consistently completed ahead of schedule, and in their premium after-sales support
+                and long-term maintenance.
+              </p>
+              <p>
+                The company is globally recognized, <span className="font-bold">trusted by investors from all over the world.</span>
+                Their signature architecture, with its distinctive façades and unique designs, truly
+                <span className="font-bold"> redefines Dubai's skyline.</span>
+              </p>
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {whyChooseUsFeatures.map((feature, index) => {
+              const IconComponent = feature.icon;
+              return (
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="text-left"
+                >
+                  <div className="inline-flex items-center justify-start w-16 h-16 md:w-20 md:h-20 mb-0 text-primary-500">
+                    <IconComponent size={48} strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-lg md:text-l font-bold text-primary-500 mb-1 uppercase tracking-wide">
+                    {feature.title}
+                  </h3>
+                  {feature.subtitle && (
+                    <p className="text-base md:text-lg font-semibold text-secondary-700 mb-2">
+                      {feature.subtitle}
+                    </p>
+                  )}
+                  <p className="text-secondary-600 text-sm md:text-base">
+                    {feature.description}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
       {/* Blog Stats Section */}
@@ -420,6 +598,32 @@ export default function Home() {
           </motion.div>
         </div>
       )}
+
+      {/* Success Modal */}
+      <AnimatePresence>
+        {showSuccessModal && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl text-center"
+            >
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-secondary-900 mb-2">
+                Thank You!
+              </h3>
+              <p className="text-secondary-600 text-lg">
+                Message submitted successfully. We'll get back to you soon!
+              </p>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </Layout>
   );
 }
