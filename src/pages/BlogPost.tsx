@@ -257,6 +257,7 @@ export default function BlogPost() {
             src={post.image_url}
             alt={post.title}
             className="object-cover w-full h-full opacity-30"
+            loading='lazy'
           />
           <div className="absolute inset-0 bg-gradient-to-t from-secondary-900/80 via-secondary-900/40 to-transparent"></div>
         </div>

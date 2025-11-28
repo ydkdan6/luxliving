@@ -75,6 +75,7 @@ export default function Properties() {
             src="https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg"
             alt="Luxury Property"
             className="object-cover w-full h-full opacity-30"
+            loading='lazy'
           />
         </div>
         <div className="relative container py-20 md:py-32">
@@ -207,6 +208,7 @@ export default function Properties() {
                 src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg"
                 alt="Luxury Real Estate"
                 className="w-full h-full object-cover"
+                loading='lazy'
               />
             </div>
           </div>

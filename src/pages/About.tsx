@@ -40,6 +40,7 @@ export default function About() {
                   src="https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg"
                   alt="Luxury Building"
                   className="rounded-sm"
+                  loading='lazy'
                 />
               </motion.div>
               <motion.div
@@ -124,6 +125,7 @@ export default function About() {
                       src={`https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg`}
                       alt={`Team Member ${member}`}
                       className="w-full transition-transform duration-300 hover:scale-110"
+                      loading='lazy'
                     />
                   </div>
                   <h3 className="text-xl font-serif mb-2">Executive Name</h3>

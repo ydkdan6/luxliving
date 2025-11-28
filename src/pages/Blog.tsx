@@ -1,50 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { supabase } from '../lib/supabase';
-import { BlogPost, BlogCategory } from '../types';
-import Layout from '../components/layout/Layout';
-import BlogCard from '../components/ui/BlogCard';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { supabase } from "../lib/supabase";
+import { BlogPost, BlogCategory } from "../types";
+import Layout from "../components/layout/Layout";
+import BlogCard from "../components/ui/BlogCard";
 
 export default function Blog() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [categories, setCategories] = useState<BlogCategory[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
   const [featuredPost, setFeaturedPost] = useState<BlogPost | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      
+
       try {
         // Fetch categories
         const { data: categoriesData, error: categoriesError } = await supabase
-          .from('blog_categories')
-          .select('*');
+          .from("blog_categories")
+          .select("*");
 
         if (categoriesError) throw categoriesError;
         setCategories(categoriesData || []);
 
         // Fetch blog posts
         let query = supabase
-          .from('blog_posts')
-          .select('*, blog_categories(name)');
-        
+          .from("blog_posts")
+          .select("*, blog_categories(name)");
+
         if (selectedCategory) {
-          query = query.eq('category_id', selectedCategory);
+          query = query.eq("category_id", selectedCategory);
         }
-        
-        const { data: postsData, error: postsError } = await query
-          .order('created_at', { ascending: false });
+
+        const { data: postsData, error: postsError } = await query.order(
+          "created_at",
+          { ascending: false }
+        );
 
         if (postsError) throw postsError;
-        
+
         // Format the posts data
-        const formattedPosts = postsData?.map(post => ({
-          ...post,
-          category_name: post.blog_categories?.name || 'Uncategorized',
-        })) || [];
-        
+        const formattedPosts =
+          postsData?.map((post) => ({
+            ...post,
+            category_name: post.blog_categories?.name || "Uncategorized",
+          })) || [];
+
         // Set the featured post to the first post
         if (formattedPosts.length > 0) {
           setFeaturedPost(formattedPosts[0]);
@@ -54,7 +57,7 @@ export default function Blog() {
           setPosts([]);
         }
       } catch (error) {
-        console.error('Error fetching blog data:', error);
+        console.error("Error fetching blog data:", error);
       } finally {
         setIsLoading(false);
       }
@@ -64,7 +67,7 @@ export default function Blog() {
   }, [selectedCategory]);
 
   const handleCategoryChange = (categoryId: string) => {
-    setSelectedCategory(categoryId === selectedCategory ? '' : categoryId);
+    setSelectedCategory(categoryId === selectedCategory ? "" : categoryId);
   };
 
   return (
@@ -76,14 +79,16 @@ export default function Blog() {
             src="https://images.pexels.com/photos/1438832/pexels-photo-1438832.jpeg"
             alt="Luxury Lifestyle"
             className="object-cover w-full h-full opacity-30"
+            loading="lazy"
+            fetchpriority="high"
           />
         </div>
         <div className="relative container py-20 md:py-32">
           <div className="max-w-2xl">
             <h1 className="mb-4">Luxury Living Insights</h1>
             <p className="text-xl text-cream-100">
-              Explore our collection of articles on luxury real estate, interior design, 
-              and sophisticated living.
+              Explore our collection of articles on luxury real estate, interior
+              design, and sophisticated living.
             </p>
           </div>
         </div>
@@ -97,10 +102,10 @@ export default function Blog() {
             <button
               className={`px-4 py-2 rounded-sm transition-colors ${
                 !selectedCategory
-                  ? 'bg-primary-500 text-white'
-                  : 'bg-white text-secondary-700 hover:bg-cream-200'
+                  ? "bg-primary-500 text-white"
+                  : "bg-white text-secondary-700 hover:bg-cream-200"
               }`}
-              onClick={() => setSelectedCategory('')}
+              onClick={() => setSelectedCategory("")}
             >
               All
             </button>
@@ -109,8 +114,8 @@ export default function Blog() {
                 key={category.id}
                 className={`px-4 py-2 rounded-sm transition-colors ${
                   selectedCategory === category.id
-                    ? 'bg-primary-500 text-white'
-                    : 'bg-white text-secondary-700 hover:bg-cream-200'
+                    ? "bg-primary-500 text-white"
+                    : "bg-white text-secondary-700 hover:bg-cream-200"
                 }`}
                 onClick={() => handleCategoryChange(category.id)}
               >
@@ -161,7 +166,8 @@ export default function Blog() {
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="mb-4 text-white">Stay Updated</h2>
             <p className="mb-8 text-cream-100">
-              Subscribe to our newsletter for the latest luxury real estate insights and exclusive offers.
+              Subscribe to our newsletter for the latest luxury real estate
+              insights and exclusive offers.
             </p>
             <form className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
               <input

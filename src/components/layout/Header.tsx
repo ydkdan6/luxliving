@@ -27,10 +27,10 @@ export default function Header() {
   }, []);
 
   const isHomePage = location.pathname === '/';
-  const headerClass = `fixed top-0 w-full z-50 transition-all duration-300 ${
+  const headerClass = `fixed top-0 w-full z-50 transition-all duration-300 backdrop-blur-md bg-black/70 ${
     isScrolled || !isHomePage
-      ? 'bg-black shadow-md py-1'
-      : 'bg-black py-1'
+      ? 'shadow-md py-1'
+      : 'py-1'
   }`;
 
   const navLinks = [

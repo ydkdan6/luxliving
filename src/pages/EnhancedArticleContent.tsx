@@ -51,7 +51,7 @@ const EnhancedArticleContent = ({ content }) => {
           modal.className = 'fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4';
           modal.innerHTML = `
             <div class="relative max-w-full max-h-full">
-              <img src="${img.src}" alt="${img.alt}" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
+              <img src="${img.src}" alt="${img.alt}" loading="lazy" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
               <button class="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-70 transition-all">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
