@@ -444,7 +444,7 @@ Just guidance you can trust and a long-term relationship you can rely on.
               </div>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full lg:w-auto">
+            <div className="grid grid-cols-2 md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full lg:w-auto">
               {whyChooseUsFeatures.map((feature, index) => {
                 const IconComponent = feature.icon;
                 return (
@@ -523,7 +523,7 @@ Just guidance you can trust and a long-term relationship you can rely on.
                     <div className="group relative" style={{ transform: 'rotate(3deg)' }}>
                       <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 bg-white rounded-2xl shadow-lg flex items-center justify-center transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl group-hover:rotate-6 border-2 border-transparent group-hover:border-primary-500/30">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="text-6xl sm:text-7xl md:text-8xl font-bold text-primary-500 relative z-10">E</div>
+                        <img className="relative z-10" src="/damac.png" alt="Partner Logo 1" loading='lazy'/>
                       </div>
                     </div>
 
@@ -531,7 +531,7 @@ Just guidance you can trust and a long-term relationship you can rely on.
                     <div className="group relative" style={{ transform: 'rotate(3deg)' }}>
                       <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 bg-white rounded-2xl shadow-lg flex items-center justify-center transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl group-hover:-rotate-6 border-2 border-transparent group-hover:border-primary-500/30">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="text-6xl sm:text-7xl md:text-8xl font-bold text-primary-500 relative z-10">M</div>
+                        <img className="relative z-10" src="/object1.png" alt="Partner Logo 2" loading='lazy'/>
                       </div>
                     </div>
 
@@ -539,7 +539,7 @@ Just guidance you can trust and a long-term relationship you can rely on.
                     <div className="group relative" style={{ transform: 'rotate(3deg)' }}>
                       <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 bg-white rounded-2xl shadow-lg flex items-center justify-center transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl group-hover:rotate-6 border-2 border-transparent group-hover:border-primary-500/30">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="text-6xl sm:text-7xl md:text-8xl font-bold text-primary-500 relative z-10">A</div>
+                        <img className="relative z-10" src="/bi.png" alt="Partner Logo 4" loading='lazy'/>
                       </div>
                     </div>
 
@@ -547,7 +547,7 @@ Just guidance you can trust and a long-term relationship you can rely on.
                     <div className="group relative" style={{ transform: 'rotate(3deg)' }}>
                       <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 bg-white rounded-2xl shadow-lg flex items-center justify-center transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl group-hover:-rotate-6 border-2 border-transparent group-hover:border-primary-500/30">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="text-6xl sm:text-7xl md:text-8xl font-bold text-primary-500 relative z-10">R</div>
+                        <img className="relative z-10" src="/sobha.jpg" alt="Partner Logo 5" loading='lazy'/>
                       </div>
                     </div>
 
@@ -555,7 +555,7 @@ Just guidance you can trust and a long-term relationship you can rely on.
                     <div className="group relative" style={{ transform: 'rotate(3deg)' }}>
                       <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 bg-white rounded-2xl shadow-lg flex items-center justify-center transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl group-hover:rotate-6 border-2 border-transparent group-hover:border-primary-500/30">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="text-6xl sm:text-7xl md:text-8xl font-bold text-primary-500 relative z-10">T</div>
+                        <img className="relative z-10" src="/damac.png" alt="Partner Logo 2" loading='lazy'/>
                       </div>
                     </div>
                   </div>
@@ -586,7 +586,7 @@ Just guidance you can trust and a long-term relationship you can rely on.
                     <div className="group relative" style={{ transform: 'rotate(-3deg)' }}>
                       <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 bg-white rounded-2xl shadow-lg flex items-center justify-center transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl group-hover:-rotate-6 border-2 border-transparent group-hover:border-primary-500/30">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="text-6xl sm:text-7xl md:text-8xl font-bold text-primary-500 relative z-10">E</div>
+                        <img className="relative z-10" src="/object1.png" alt="Partner Logo 2" loading='lazy'/>
                       </div>
                     </div>
 
@@ -594,7 +594,7 @@ Just guidance you can trust and a long-term relationship you can rely on.
                     <div className="group relative" style={{ transform: 'rotate(-3deg)' }}>
                       <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 bg-white rounded-2xl shadow-lg flex items-center justify-center transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl group-hover:rotate-6 border-2 border-transparent group-hover:border-primary-500/30">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="text-6xl sm:text-7xl md:text-8xl font-bold text-primary-500 relative z-10">M</div>
+                        <img className="relative z-10" src="/bi.png" alt="Partner Logo 2" loading='lazy'/>
                       </div>
                     </div>
 
@@ -602,7 +602,7 @@ Just guidance you can trust and a long-term relationship you can rely on.
                     <div className="group relative" style={{ transform: 'rotate(-3deg)' }}>
                       <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 bg-white rounded-2xl shadow-lg flex items-center justify-center transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl group-hover:-rotate-6 border-2 border-transparent group-hover:border-primary-500/30">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="text-6xl sm:text-7xl md:text-8xl font-bold text-primary-500 relative z-10">A</div>
+                        <img className="relative z-10" src="/sobha.jpg" alt="Partner Logo 2" loading='lazy'/>
                       </div>
                     </div>
 
@@ -610,7 +610,7 @@ Just guidance you can trust and a long-term relationship you can rely on.
                     <div className="group relative" style={{ transform: 'rotate(-3deg)' }}>
                       <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 bg-white rounded-2xl shadow-lg flex items-center justify-center transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl group-hover:rotate-6 border-2 border-transparent group-hover:border-primary-500/30">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="text-6xl sm:text-7xl md:text-8xl font-bold text-primary-500 relative z-10">R</div>
+                        <img className="relative z-10" src="/damac.png" alt="Partner Logo 2" loading='lazy'/>
                       </div>
                     </div>
 
@@ -618,7 +618,7 @@ Just guidance you can trust and a long-term relationship you can rely on.
                     <div className="group relative" style={{ transform: 'rotate(-3deg)' }}>
                       <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 bg-white rounded-2xl shadow-lg flex items-center justify-center transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl group-hover:-rotate-6 border-2 border-transparent group-hover:border-primary-500/30">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="text-6xl sm:text-7xl md:text-8xl font-bold text-primary-500 relative z-10">T</div>
+                        <img className="relative z-10" src="/object1.png" alt="Partner Logo 2" loading='lazy'/>
                       </div>
                     </div>
                   </div>

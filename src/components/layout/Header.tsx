@@ -58,12 +58,12 @@ export default function Header() {
             <Link
               key={link.path}
               to={link.path}
-              className={`font-medium transition-colors text-white hover:text-primary-500 ${
+              className={`font-medium transition-colors text-primary-500 hover:text-primary-500 ${
                 location.pathname === link.path
                   ? 'text-primary-500'
                   : isScrolled || !isHomePage
                   ? 'text-secondary-800'
-                  : 'text-white'
+                  : 'text-primary-500'
               }`}
             >
               {link.name}
@@ -98,7 +98,7 @@ export default function Header() {
           ) : (
             <Link
               to="/login"
-              className={`font-medium transition-colors hover:text-primary-500 ${
+              className={` bg-primary-500 py-2 px-4 rounded-xl font-medium transition-colors hover:text-primary-500 ${
                 isScrolled || !isHomePage ? 'text-secondary-800' : 'text-white'
               }`}
             >

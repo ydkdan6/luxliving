@@ -59,7 +59,7 @@ export default function PropertyDetail() {
   if (isLoading) {
     return (
       <Layout>
-        <div className="container py-20">
+        <div className="h-screen container py-20">
           <div className="text-center">Loading property details...</div>
         </div>
       </Layout>
@@ -69,7 +69,7 @@ export default function PropertyDetail() {
   if (!property) {
     return (
       <Layout>
-        <div className="container py-20">
+        <div className="h-screen container py-20">
           <div className="text-center">
             <h2 className="mb-4">Property Not Found</h2>
             <p className="mb-6 text-secondary-600">
@@ -87,7 +87,7 @@ export default function PropertyDetail() {
   return (
     <Layout>
       {/* Property Header */}
-      <section className="relative bg-secondary-900 text-white">
+      <section className="h-screen relative bg-white text-primary-500">
         <div className="absolute inset-0">
           <img
             src={property.image_url}
@@ -116,21 +116,21 @@ export default function PropertyDetail() {
             <div className="lg:col-span-2">
               {/* Property Overview */}
               <div className="p-6 mb-8 bg-cream-50 rounded-sm">
-                <h3 className="mb-6 text-2xl font-medium">Property Overview</h3>
+                <h3 className="mb-6 text-2xl font-medium text-primary-500">Property Overview</h3>
                 <div className="grid grid-cols-3 mb-6 text-center">
                   <div className="p-4">
                     <Bed size={24} className="mx-auto mb-2 text-primary-500" />
-                    <p className="text-lg font-medium">{property.bedrooms}</p>
+                    <p className="text-lg font-medium text-secondary-600">{property.bedrooms}</p>
                     <p className="text-sm text-secondary-600">Bedrooms</p>
                   </div>
                   <div className="p-4">
                     <Bath size={24} className="mx-auto mb-2 text-primary-500" />
-                    <p className="text-lg font-medium">{property.bathrooms}</p>
+                    <p className="text-lg font-medium text-secondary-600">{property.bathrooms}</p>
                     <p className="text-sm text-secondary-600">Bathrooms</p>
                   </div>
                   <div className="p-4">
                     <Square size={24} className="mx-auto mb-2 text-primary-500" />
-                    <p className="text-lg font-medium">{property.square_feet.toLocaleString()}</p>
+                    <p className="text-lg font-medium text-secondary-600">{property.square_feet.toLocaleString()}</p>
                     <p className="text-sm text-secondary-600">Square Feet</p>
                   </div>
                 </div>
@@ -143,7 +143,7 @@ export default function PropertyDetail() {
               {/* Property Description */}
               <div className="mb-8">
                 <h3 className="mb-4 text-2xl font-medium">Description</h3>
-                <p className="mb-4 text-secondary-700">{property.description}</p>
+                <p className="mb-4 text-white">{property.description}</p>
               </div>
 
               {/* Property Features */}
@@ -166,7 +166,7 @@ export default function PropertyDetail() {
                 <h3 className="mb-4 text-2xl font-medium">Location</h3>
                 <div className="aspect-[16/9] bg-cream-200 rounded-sm">
                   {/* Map would go here in a real implementation */}
-                  <div className="flex items-center justify-center h-full text-secondary-900">
+                  <div className="flex items-center justify-center h-full text-white">
                     <p>Map showing {property.address}</p>
                   </div>
                 </div>
@@ -181,7 +181,7 @@ export default function PropertyDetail() {
               {/* Similar Properties */}
               {similarProperties.length > 0 && (
                 <div className="mt-8 p-6 bg-cream-50 rounded-sm">
-                  <h3 className="mb-6 text-xl font-medium">Similar Properties</h3>
+                  <h3 className="mb-6 text-xl font-medium text-white">Similar Properties</h3>
                   <div className="space-y-6">
                     {similarProperties.map((similarProperty) => (
                       <div key={similarProperty.id} className="flex space-x-4">
