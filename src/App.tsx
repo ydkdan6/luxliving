@@ -21,11 +21,18 @@ import AdminInquiries from './pages/admin/Inquiries';
 import AuthHandler from './pages/AuthCallbackPage';
 import Admin from './components/admin/ContactList';
 import AdminLayout from './pages/admin/AdminLayout';
+import { motion } from 'framer-motion';
 
 function App() {
   return (
     <>
      <Toaster position="top-right" />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1.4 }}
+    >  
     <Routes>
       {/* Public Routes */}
       <Route path="/" element={<HomePage />} />
@@ -45,6 +52,7 @@ function App() {
       <Route path="/admin/inquiries" element={<AdminInquiries />} />
       <Route path="/admin/contact-messages" element={<AdminLayout><Admin /></AdminLayout>} />
     </Routes>
+    </motion.div>
     </>
   );
 }

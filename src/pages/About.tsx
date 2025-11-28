@@ -5,7 +5,7 @@ import Layout from '../components/layout/Layout';
 export default function About() {
   return (
     <Layout>
-      <div className="bg-secondary-900 text-cream-100">
+      <div className="bg-white text-black">
         {/* Hero Section */}
         <section className="relative py-20">
           <div className="container">
@@ -27,7 +27,7 @@ export default function About() {
         </section>
 
         {/* Our Story */}
-        <section className="py-20 bg-secondary-950">
+        <section className="py-20 bg-white">
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <motion.div
@@ -50,10 +50,10 @@ export default function About() {
                 viewport={{ once: true }}
               >
                 <h2 className="mb-6">Our Story</h2>
-                <p className="text-cream-300 mb-6">
+                <p className="text-black mb-6">
                   Founded with a vision to revolutionize the luxury real estate market, we have consistently delivered unparalleled service and exceptional properties to our clients for over a decade.
                 </p>
-                <p className="text-cream-300">
+                <p className="text-black">
                   Our commitment to excellence and attention to detail has earned us the trust of the most discerning clients worldwide.
                 </p>
               </motion.div>
@@ -62,11 +62,11 @@ export default function About() {
         </section>
 
         {/* Values */}
-        <section className="py-20 bg-secondary-900">
+        <section className="py-20 bg-white">
           <div className="container">
             <div className="text-center mb-16">
               <h2 className="mb-6">Our Core Values</h2>
-              <p className="text-cream-300 max-w-2xl mx-auto">
+              <p className="text-black max-w-2xl mx-auto">
                 These principles guide everything we do and ensure we maintain the highest standards in luxury real estate.
               </p>
             </div>
@@ -91,10 +91,10 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
                   viewport={{ once: true }}
-                  className="p-8 bg-secondary-950 rounded-sm"
+                  className="p-8 bg-primary-500 rounded-xl"
                 >
                   <h3 className="text-xl font-serif mb-4">{value.title}</h3>
-                  <p className="text-cream-300">{value.description}</p>
+                  <p className="text-black">{value.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -102,16 +102,16 @@ export default function About() {
         </section>
 
         {/* Team */}
-        <section className="py-20 bg-secondary-950">
+        <section className="py-20 bg-white">
           <div className="container">
             <div className="text-center mb-16">
               <h2 className="mb-6">Our Leadership Team</h2>
-              <p className="text-cream-300 max-w-2xl mx-auto">
+              <p className="text-black max-w-2xl mx-auto">
                 Meet the experts who make luxury living a reality.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[1, 2, 3].map((member, index) => (
+              {[1].map((member, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -128,8 +128,8 @@ export default function About() {
                       loading='lazy'
                     />
                   </div>
-                  <h3 className="text-xl font-serif mb-2">Executive Name</h3>
-                  <p className="text-primary-400">Position</p>
+                  <h3 className="text-xl font-serif mb-2">Stanley Dike</h3>
+                  <p className="text-primary-400">CEO</p>
                 </motion.div>
               ))}
             </div>

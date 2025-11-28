@@ -7,7 +7,7 @@ import ContactForm from '../components/forms/ContactForm';
 export default function Contact() {
   return (
     <Layout>
-      <div className="bg-secondary-900 text-cream-100">
+      <div className="bg-white text-secondary-900">
         {/* Hero Section */}
         <section className="relative py-20">
           <div className="container">
@@ -29,7 +29,7 @@ export default function Contact() {
         </section>
 
         {/* Contact Information */}
-        <section className="py-20 bg-secondary-950">
+        <section className="py-20 bg-white text-secondary-900">
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div>
@@ -45,7 +45,7 @@ export default function Contact() {
                     <MapPin className="w-6 h-6 text-primary-400 mt-1" />
                     <div className="ml-4">
                       <h3 className="text-lg font-serif mb-2">Visit Us</h3>
-                      <p className="text-cream-300">
+                      <p className="text-black">
                         123 Luxury Avenue<br />
                         Beverly Hills, CA 90210
                       </p>
@@ -62,7 +62,7 @@ export default function Contact() {
                     <Phone className="w-6 h-6 text-primary-400 mt-1" />
                     <div className="ml-4">
                       <h3 className="text-lg font-serif mb-2">Call Us</h3>
-                      <p className="text-cream-300">+1 437 559-5135</p>
+                      <p className="text-black">+1 437 559-5135</p>
                     </div>
                   </motion.div>
 
@@ -76,14 +76,14 @@ export default function Contact() {
                     <Mail className="w-6 h-6 text-primary-400 mt-1" />
                     <div className="ml-4">
                       <h3 className="text-lg font-serif mb-2">Email Us</h3>
-                      <p className="text-cream-300">info@buydubailuxury.com</p>
+                      <p className="text-black">info@buydubailuxury.com</p>
                     </div>
                   </motion.div>
                 </div>
 
                 <div className="mt-12">
                   <h3 className="text-lg font-serif mb-4">Office Hours</h3>
-                  <div className="space-y-2 text-cream-300">
+                  <div className="space-y-2 text-black">
                     <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
                     <p>Saturday: 10:00 AM - 4:00 PM</p>
                     <p>Sunday: Closed</p>
