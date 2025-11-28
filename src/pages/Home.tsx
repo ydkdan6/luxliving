@@ -230,7 +230,7 @@ export default function Home() {
       <Toaster position="top-right" />
 
       {/* Hero Section with Carousel */}
-      <section className="relative h-[700px] overflow-hidden">
+      <section className="relative h-[900px] md:h-[700px] overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentImageIndex}
@@ -286,7 +286,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="max-w-5xl text-cream-100 mt-[60px] md:mt-[0px]"
+            className="max-w-5xl text-cream-100 mt[90px] md:mt-0"
           >
             <motion.div
               initial={{ opacity: 0, x: -20 }}
