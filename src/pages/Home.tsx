@@ -230,7 +230,7 @@ export default function Home() {
       <Toaster position="top-right" />
 
       {/* Hero Section with Carousel */}
-      <section className="relative h-[1000px] overflow-hidden">
+      <section className="relative h-[1000px] md:h-[700px] overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentImageIndex}
