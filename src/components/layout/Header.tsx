@@ -27,7 +27,7 @@ export default function Header() {
   }, []);
 
   const isHomePage = location.pathname === '/';
-  const headerClass = `fixed top-0 w-full z-50 transition-all duration-300 backdrop-blur-md bg-black/70 ${
+  const headerClass = `fixed top-0 w-full z-50 transition-all duration-300 backdrop-blur-md ${
     isScrolled || !isHomePage
       ? 'shadow-md py-1'
       : 'py-1'
@@ -118,7 +118,7 @@ export default function Header() {
               size={24}
               className={
                 isScrolled || !isHomePage
-                  ? 'text-secondary-800'
+                  ? 'text-primary-500'
                   : 'text-white'
               }
             />
@@ -127,7 +127,7 @@ export default function Header() {
               size={24}
               className={
                 isScrolled || !isHomePage
-                  ? 'text-secondary-800'
+                  ? 'text-primary-500'
                   : 'text-white'
               }
             />
