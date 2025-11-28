@@ -286,7 +286,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="max-w-5xl text-cream-100 mt-[120px] md:mt-0"
+            className="max-w-5xl text-cream-100 mt[90px] md:mt-0"
           >
             <motion.div
               initial={{ opacity: 0, x: -20 }}
