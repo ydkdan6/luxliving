@@ -304,19 +304,22 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 leading-tight"
+              className="text-xl md:text-6xl lg:text-4xl font-serif font-bold mb-6 leading-tight"
             >
-              Stories That 
-              <span className="block text-primary-400 italic">Inspire</span>
+              Discover How Canadians & North American Immigrants Are
+              <span className="block text-primary-400 italic">Building Wealth Through Dubai Real Estate</span>
             </motion.h1>
             
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
-              className="text-lg md:text-xl lg:text-2xl text-cream-200 mb-8 leading-relaxed max-w-2xl"
+              className="text-lg md:text-xl lg:text-[18px] text-cream-200 mb-8 leading-relaxed max-w-2xl"
             >
-              Dive into a world of luxury, culture, and sophistication. Discover stories that shape perspectives and inspire extraordinary living.
+              Explore proven opportunities, real market data and on-the-ground gidance, without
+              pressure, confusion or risk of being left on your own. Learn how Dubai's high-yield property market can fit into 
+              your long-term wealth strategy.
+
             </motion.p>
             
             <motion.div
@@ -326,11 +329,11 @@ export default function Home() {
               className="flex flex-wrap gap-4 mb-12"
             >
               <button
-                onClick={() => setShowContactForm(true)}
+                // onClick={() => setShowContactForm(true)}
                 className="group bg-transparent border-2 border-white/30 hover:border-primary-400 text-white hover:text-primary-400 px-6 md:px-8 py-3 md:py-4 rounded-sm font-medium transition-all duration-300 flex items-center gap-3 backdrop-blur-sm text-sm md:text-base"
               >
                 <MessageSquare size={20} />
-                Contact Us
+                <a href="https://wa.me/+2347030665135">Book a Private Consultation</a>
               </button>
 
               <Link
