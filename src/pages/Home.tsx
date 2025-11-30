@@ -12,23 +12,23 @@ import NewsletterSignup from '../components/NewsletterSignup';
 
 const heroImages = [
   {
-    url: "https://images.pexels.com/photos/618079/pexels-photo-618079.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop",
+    url: "/IMG_5326.jpeg",
     title: "Dubai Marina Skyline"
   },
   {
-    url: "https://dandbdubai.ae/wp-content/uploads/2023/05/The-10-Most-Beautiful-Places-in-Dubai-1024x683.jpg",
+    url: "/IMG_5327.jpeg",
     title: "Burj Khalifa at Night"
   },
    {
-    url: "https://cdn-imgix.headout.com/media/images/b3ff7055fbb17bf08d5b6c399874c98d-Untitled-1.jpg?ar=16%3A10&auto=format&crop=faces%2Ccenter&fit=crop&h=1080&q=85&w=1920",
+    url: "/IMG_5328.jpeg",
     title: "Burj Khalifa at Night"
   },
    {
-    url: "https://www.planetware.com/wpimages/2022/11/united-arab-emirates-dubai-top-attractions-view-dubai-fountain-display.jpg",
+    url: "/IMG_5329.jpeg",
     title: "Burj Khalifa at Night"
   },
   {
-    url: "https://images.wanderon.in/blogs/new/2023/06/feature-dubai-marina-skyline-2c8f1708f2a1.jpg",
+    url: "/IMG_5330.jpeg",
     title: "Dubai Frame"
   }
 ];
@@ -244,8 +244,8 @@ export default function Home() {
               src={heroImages[currentImageIndex].url}
               alt={heroImages[currentImageIndex].title}
               className="object-cover w-full h-full"
-              loading="eager"
-              fetchpriority="high"
+              loading="lazy"
+              // fetchpriority="high"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-primary-900/60" />
           </motion.div>
