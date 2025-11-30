@@ -252,12 +252,12 @@ export default function Home() {
         </AnimatePresence>
 
         {/* Navigation arrows */}
-        <button
+        {/* <button
           onClick={() => setCurrentImageIndex((prev) => (prev - 1 + heroImages.length) % heroImages.length)}
           className="absolute left-6 top-1/2 transform -translate-y-1/2 text-white p-3 rounded-full bg-black/20 backdrop-blur-sm hover:bg-black/40 transition-all z-10 border border-white/20"
         >
           <ArrowLeft size={20} />
-        </button>
+        </button> */}
 
         <button
           onClick={() => setCurrentImageIndex((prev) => (prev + 1) % heroImages.length)}
