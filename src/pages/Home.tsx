@@ -326,7 +326,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.1 }}
-              className="flex flex-wrap gap-4 mb-12"
+              className="flex flex-wrap gap-4 mb-12 mt-6 md:mt-0"
             >
               <button
                 // onClick={() => setShowContactForm(true)}
