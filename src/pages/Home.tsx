@@ -304,7 +304,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-xl md:text-6xl lg:text-4xl font-serif font-bold mb-6 leading-tight"
+              className="text-2xl md:text-6xl lg:text-4xl font-serif font-bold mb-6 leading-tight"
             >
               Discover How Canadians & North American Immigrants Are
               <span className="block text-primary-400 italic">Building Wealth Through Dubai Real Estate</span>
